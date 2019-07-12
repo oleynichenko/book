@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <div class="header__menu-icon">
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a class="header__logo mat-subheading-2"
+       routerLink="">Птиха</a>
+  </div>
+  <div
+    fxFlex
+    fxLayout
+    fxLayoutAlign="flex-end"
+    fxHide.xs
+    fxShow
+  >
+    <ul fxLayout class="header__menu">
+      <li>
+        <a class="header__link"
+           routerLink="/about-book"
+           routerLinkActive="header__link--active"
+           mat-button>About book</a>
+      </li>
+      <li>
+        <a class="header__link"
+           routerLink="/useful-links"
+           routerLinkActive="header__link--active"
+           mat-button>Useful links</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

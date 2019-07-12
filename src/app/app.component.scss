@@ -1,0 +1,11 @@
+mat-sidenav-container {
+  min-height: calc(100% - 64px);
+}
+
+mat-sidenav {
+  min-width: 250px;
+}
+
+.app__sidenav-content {
+  padding-bottom: 50px;
+}
