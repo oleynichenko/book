@@ -6,12 +6,12 @@
   </div>
   <div>
     <a class="header__logo mat-subheading-2"
-       routerLink="">Птиха</a>
+       routerLink="">{{title$ | async}}</a>
   </div>
   <div
     fxFlex
     fxLayout
-    fxLayoutAlign="flex-end"
+    fxLayoutAlign="flex-start"
     fxHide.xs
     fxShow
   >
@@ -30,4 +30,5 @@
       </li>
     </ul>
   </div>
+  <app-language-menu></app-language-menu>
 </mat-toolbar>

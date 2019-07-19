@@ -1,0 +1,24 @@
+<mat-nav-list>
+  <ng-container *ngFor="let item of sideMenu$ | async">
+    <a mat-list-item
+       (click)="onClose()"
+       [routerLink]="item.articleId"
+       *ngIf="!item.children else itemWithChildren">{{item.title}}
+    </a>
+    <ng-template #itemWithChildren>
+      <mat-expansion-panel [class.mat-elevation-z0]="true">
+        <mat-expansion-panel-header>
+          {{item.title}}
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item
+             *ngFor="let child of item.children"
+             [routerLink]="child.articleId"
+             (click)="onClose()">{{child.title}}
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </ng-template>
+  </ng-container>
+</mat-nav-list>
+

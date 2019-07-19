@@ -1,27 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
-import {MaterialModule} from './material.module';
+import {API_ENDPOINT, AppConfig} from './app.config';
 
+import {SharedModule} from './shared/shared.module';
+import {BookModule} from './book/book.module';
 import { AppComponent } from './app.component';
-import {HeaderComponent} from './navigation/header/header.component';
-import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidenavListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    HttpClientModule,
+    SharedModule,
+    BookModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: API_ENDPOINT, useValue: AppConfig.apiEndpoint}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

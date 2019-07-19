@@ -45,3 +45,7 @@
   background-color: #fff;
 }
 
+:host ::ng-deep .mat-toolbar-single-row {
+  padding: 0 12px;
+}
+
