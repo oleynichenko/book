@@ -27,4 +27,8 @@ export class BookService {
   get lang() {
     return this.interfaceState.getValue().langId;
   }
+
+  get defaultAuthor() {
+    return this.interfaceState.getValue().defaultAuthor;
+  }
 }

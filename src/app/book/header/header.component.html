@@ -18,13 +18,19 @@
     <ul fxLayout class="header__menu">
       <li>
         <a class="header__link"
-           routerLink="/about-book"
+           [routerLink]="'/' + translate.currentLang"
+           routerLinkActive="header__link--active"
+           mat-button>Library</a>
+      </li>
+      <li>
+        <a class="header__link"
+           routerLink="about-book"
            routerLinkActive="header__link--active"
            mat-button>About book</a>
       </li>
       <li>
         <a class="header__link"
-           routerLink="/useful-links"
+           routerLink="useful-links"
            routerLinkActive="header__link--active"
            mat-button>Useful links</a>
       </li>

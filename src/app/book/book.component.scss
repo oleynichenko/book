@@ -1,11 +1,17 @@
 mat-sidenav-container {
-  min-height: calc(100% - 64px);
+  height: calc(100% - 64px);
 }
 
 mat-sidenav {
   width: 260px;
 }
 
-.app__sidenav-content {
-  padding-bottom: 50px;
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+
+// прижать футеp к низу
+.router-wrapper {
+  flex-grow: 1;
 }

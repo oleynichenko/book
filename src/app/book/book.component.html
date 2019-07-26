@@ -7,8 +7,11 @@
         (closeSidenav)="sidenav.close()">
       </app-sidenav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="app__sidenav-content">
-      <router-outlet></router-outlet>
+    <mat-sidenav-content>
+      <div class="router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>

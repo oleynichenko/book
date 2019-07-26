@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {BookService} from '../book.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +14,14 @@ export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   title$: Observable<string>;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.title$ = this.bookService.interfaceState
-      .pipe(map(data => data.title));
+      .pipe(
+        map(data => data.title)
+      );
   }
 
   onToggleSidenav() {
