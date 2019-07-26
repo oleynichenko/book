@@ -4,13 +4,14 @@ import {BehaviorSubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
 import {API_ENDPOINT} from '../app.config';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class BookService {
   interfaceState = new BehaviorSubject(null);
-  private _defaultAuthor: string;
 
   constructor(private http: HttpClient,
+              private translate: TranslateService,
               @Inject(API_ENDPOINT) private apiEndpoint) {}
 
   getInterfaceData(lang: string, bookName = this.bookName) {
@@ -25,15 +26,12 @@ export class BookService {
     return this.interfaceState.getValue().bookId;
   }
 
-  get lang() {
-    return this.interfaceState.getValue().langId;
-  }
-
-  set defaultAuthor(value) {
-    this._defaultAuthor = value;
-  }
-
   get defaultAuthor() {
-    return this._defaultAuthor || this.interfaceState.getValue().defaultAuthor;
+    const currentLang = this.translate.currentLang;
+    const sources = this.interfaceState.getValue().sources;
+
+    return sources
+      .find(s => s.langId === currentLang)
+      .defaultAuthor;
   }
 }

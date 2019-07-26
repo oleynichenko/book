@@ -7,6 +7,7 @@ import {SharedModule} from '../shared/shared.module';
 import {BookService} from './book.service';
 import {AppRoutingModule} from '../app-routing.module';
 import { ArticleComponent } from './article/article.component';
+import { ArticleMenuComponent } from './article/article-menu/article-menu.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ArticleComponent } from './article/article.component';
     HeaderComponent,
     SidenavListComponent,
     BookComponent,
-    ArticleComponent
+    ArticleComponent,
+    ArticleMenuComponent
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,7 @@ export class ArticleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    // здесь подписка на article-menu
   }
 
 }
