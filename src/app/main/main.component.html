@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <div>
+    <a class="header__logo mat-subheading-2"
+       [routerLink]="'/' + translate.currentLang">Library</a>
+  </div>
+  <div
+    fxFlex
+    fxLayout
+    fxLayoutAlign="flex-start"
+    fxHide.xs
+    fxShow
+  >
+    <ul fxLayout class="header__menu">
+      <li>
+        <a class="header__link"
+           routerLink="about"
+           routerLinkActive="header__link--active"
+           mat-button>About</a>
+      </li>
+      <li>
+        <a class="header__link"
+           routerLink="authors"
+           routerLinkActive="header__link--active"
+           mat-button>Authors</a>
+      </li>
+    </ul>
+  </div>
+  <app-language-menu></app-language-menu>
+</mat-toolbar>
+<div class="main__content-wrapper">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

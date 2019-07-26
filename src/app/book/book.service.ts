@@ -8,6 +8,7 @@ import {API_ENDPOINT} from '../app.config';
 @Injectable()
 export class BookService {
   interfaceState = new BehaviorSubject(null);
+  private _defaultAuthor: string;
 
   constructor(private http: HttpClient,
               @Inject(API_ENDPOINT) private apiEndpoint) {}
@@ -28,7 +29,11 @@ export class BookService {
     return this.interfaceState.getValue().langId;
   }
 
+  set defaultAuthor(value) {
+    this._defaultAuthor = value;
+  }
+
   get defaultAuthor() {
-    return this.interfaceState.getValue().defaultAuthor;
+    return this._defaultAuthor || this.interfaceState.getValue().defaultAuthor;
   }
 }
