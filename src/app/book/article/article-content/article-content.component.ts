@@ -7,13 +7,14 @@ interface ChunkData {
 }
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  selector: 'app-article-content',
+  templateUrl: './article-content.component.html',
+  styleUrls: ['./article-content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ArticleContentComponent implements OnInit {
   @Input() set articles(value: any[]) {
     if (value.length > 0) {
+
       const mainArticle = value[0];
       this.title = mainArticle.title;
 
@@ -21,18 +22,21 @@ export class ContentComponent implements OnInit {
         const chunkData = [c];
 
         for (let i = 1; i < value.length; i++) {
-          const chunk = this._getChunkById(value[i], c.chunkId);
+          const chunk = this._getChunkById(value[i].chunks, c.chunkId);
 
           if (chunk) {
             chunkData.push(chunk);
           }
         }
+
+        return chunkData;
       });
     }
   }
 
   title: string;
   content: ChunkData[][];
+
   constructor() { }
 
   ngOnInit() {
