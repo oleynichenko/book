@@ -1,17 +1,17 @@
-<app-loading *ngIf="interfaceDataIsLoading"></app-loading>
-<ng-container *ngIf="!interfaceDataIsLoading">
-  <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav role="navigation">
-      <app-sidenav-list
-        (closeSidenav)="sidenav.close()">
-      </app-sidenav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="router-wrapper">
-        <router-outlet></router-outlet>
-      </div>
-      <app-footer></app-footer>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</ng-container>
+<mat-sidenav-container [dir]="appService.dir">
+  <mat-sidenav
+    #sidenav
+    role="navigation"
+    [autoFocus]="false">
+    <app-sidenav-list (closeSidenav)="sidenav.close()">
+    </app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()">
+    </app-header>
+    <div class="book__content">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

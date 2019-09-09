@@ -1,5 +1,7 @@
+@import "variables";
+
 mat-sidenav-container {
-  height: calc(100% - 64px);
+  height: 100vh;
 }
 
 mat-sidenav {
@@ -12,6 +14,23 @@ mat-sidenav-content {
 }
 
 // прижать футеp к низу
-.router-wrapper {
+.book__content {
   flex-grow: 1;
+  padding: 0 16px;
+  margin-bottom: 48px;
+}
+
+@media ($tablet-width) {
+  .book__content {
+    padding: 0 24px;
+  }
+}
+
+@media ($desktop-width) {
+  .book__content  {
+    margin-top: 64px + 72px;
+    padding: 0 32px;
+
+    margin-bottom: 72px;
+  }
 }

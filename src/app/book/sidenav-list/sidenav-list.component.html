@@ -1,19 +1,23 @@
-<mat-nav-list>
+<mat-nav-list class="nav">
   <ng-container *ngFor="let item of sideMenu$ | async">
     <a mat-list-item
+       class="nav__item"
+       routerLinkActive="nav__item--active"
        (click)="onClose()"
-       [routerLink]="item.articleId"
+       [routerLink]="'article/' + item.articleId"
        *ngIf="!item.children else itemWithChildren">{{item.title}}
     </a>
     <ng-template #itemWithChildren>
-      <mat-expansion-panel [class.mat-elevation-z0]="true">
-        <mat-expansion-panel-header>
+      <mat-expansion-panel class="nav__group mat-elevation-z0">
+        <mat-expansion-panel-header class="nav__title">
           {{item.title}}
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item
+             class="nav__item"
+             routerLinkActive="nav__item--active"
              *ngFor="let child of item.children"
-             [routerLink]="child.articleId"
+             [routerLink]="'article/' + child.articleId"
              (click)="onClose()">{{child.title}}
           </a>
         </mat-nav-list>

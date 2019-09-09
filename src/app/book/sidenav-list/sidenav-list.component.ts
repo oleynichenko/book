@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-
-import {BookService} from '../book.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-sidenav-list',

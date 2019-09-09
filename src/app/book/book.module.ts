@@ -8,6 +8,10 @@ import {BookService} from './book.service';
 import {AppRoutingModule} from '../app-routing.module';
 import { ArticleComponent } from './article/article.component';
 import { ArticleMenuComponent } from './article/article-menu/article-menu.component';
+import { CommentComponent } from './article/comment/comment.component';
+import {ArticleContentComponent} from './article/article-content/article-content.component';
+import { CommentMenuComponent } from './article/comment-menu/comment-menu.component';
+import {CommentService} from './article/comment.service';
 
 
 @NgModule({
@@ -16,7 +20,10 @@ import { ArticleMenuComponent } from './article/article-menu/article-menu.compon
     SidenavListComponent,
     BookComponent,
     ArticleComponent,
-    ArticleMenuComponent
+    ArticleMenuComponent,
+    CommentComponent,
+    ArticleContentComponent,
+    CommentMenuComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +33,6 @@ import { ArticleMenuComponent } from './article/article-menu/article-menu.compon
   exports: [
     AppRoutingModule
   ],
-  providers: [BookService]
+  providers: [BookService, CommentService]
 })
 export class BookModule { }

@@ -1,0 +1,29 @@
+@import 'variables';
+
+.comment-menu {
+  display: flex;
+  justify-content: space-between;
+  max-width: 320px;
+}
+
+.comment-menu__field--sm ::ng-deep .mat-form-field-infix {
+  width: 100px;
+}
+
+.comment-menu__field--bg ::ng-deep .mat-form-field-infix {
+  width: 150px;
+}
+
+@media ($tablet-width) {
+  .comment-menu {
+    max-width: 500px;
+  }
+
+  .comment-menu__field--sm ::ng-deep .mat-form-field-infix {
+    width: 115px;
+  }
+
+  .comment-menu__field--bg ::ng-deep .mat-form-field-infix {
+    width: 330px;
+  }
+}

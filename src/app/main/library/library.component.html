@@ -1,1 +1,4 @@
-<a routerLink="pticha">Птиха</a>
+<ng-container *ngFor="let book of books">
+  <a [routerLink]="[book.id]">{{book.title}}</a>
+  <p></p>
+</ng-container>

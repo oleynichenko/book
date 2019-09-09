@@ -1,2 +1,21 @@
-<app-article-menu></app-article-menu>
-<app-content [articles]="articles"></app-content>
+<article class="article">
+  <h1 class="article__title">{{articleTitle}}</h1>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="{{'TEXT' | translate}}">
+      <app-article-menu
+        class="article__panel"
+        *ngIf="articleMenuData"
+        (menuChanged)="onMenuChanges($event)"
+        [menuData]="articleMenuData"
+        [articleId]="articleId">
+      </app-article-menu>
+      <app-article-content [articles]="articles"></app-article-content>
+    </mat-tab>
+    <mat-tab label="{{'COMMENTS' | translate}}"
+             *ngIf="commentService.langSelect">
+      <app-comment-menu
+        class="article__panel article__panel--mt"></app-comment-menu>
+      <app-comment></app-comment>
+    </mat-tab>
+  </mat-tab-group>
+</article>

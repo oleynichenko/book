@@ -6,7 +6,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import {API_ENDPOINT, APP_CONFIG, AppConfig} from './app.config';
+import {API_ENDPOINT, APP_CONFIG, AppConfig, APP_BREAKPOINTS} from './app.config';
 import {SharedModule} from './shared/shared.module';
 import {BookModule} from './book/book.module';
 import { AppComponent } from './app.component';
@@ -39,6 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     {provide: API_ENDPOINT, useValue: AppConfig.apiEndpoint},
+    {provide: APP_BREAKPOINTS, useValue: AppConfig.breakPoints},
     {provide: APP_CONFIG, useValue: AppConfig}
   ],
   bootstrap: [AppComponent]

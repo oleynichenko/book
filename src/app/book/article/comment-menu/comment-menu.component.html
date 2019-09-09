@@ -1,0 +1,20 @@
+<nav class="comment-menu">
+  <mat-form-field class="comment-menu__field comment-menu__field--sm">
+    <mat-label>{{'LANGUAGE' | translate}}</mat-label>
+    <mat-select (selectionChange)="onLangMenuSelect($event.value)"
+                [(value)]="commentService.langSelectValue">
+      <mat-option *ngFor="let item of commentService.langSelect"
+                  [value]="item.langId">{{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="comment-menu__field comment-menu__field--bg">
+    <mat-label>{{'AUTHOR' | translate}}</mat-label>
+    <mat-select (selectionChange)="onCommentsMenuSelect($event.value)"
+                [(value)]="commentService.commentsSelectValue">
+      <mat-option *ngFor="let comment of commentService.commentsSelect"
+                  [value]="comment">{{comment.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</nav>

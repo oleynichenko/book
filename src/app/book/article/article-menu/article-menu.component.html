@@ -1,3 +1,40 @@
-<p>
-  article-menu works!
-</p>
+<button mat-stroked-button
+        cdkOverlayOrigin
+        #triger="cdkOverlayOrigin"
+        (click)="isMenuShown = !isMenuShown">{{'TRANSLATIONS' | translate}}</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="triger"
+  [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+  [cdkConnectedOverlayOpen]="isMenuShown"
+  (backdropClick)="isMenuShown = false"
+  [cdkConnectedOverlayHasBackdrop]="true">
+  <div class="article-menu__card mat-elevation-z4">
+    <section class="article-menu__sect">
+      <h3 class="article-menu__title">{{'DISPLAYED' | translate}}</h3>
+      <ul class="article-menu__list"
+          #displayedList="cdkDropList"
+          cdkDropList
+          [cdkDropListData]="displayedMenuItems"
+          [cdkDropListConnectedTo]="[availableList]"
+          (cdkDropListDropped)="dropInDisplayed($event)">
+        <li class="article-menu__item"
+            cdkDrag *ngFor="let item of displayedMenuItems">{{item.title}}</li>
+      </ul>
+    </section>
+    <section class="article-menu__sect">
+      <h3 class="article-menu__title">{{'AVAILABLE' | translate}}</h3>
+      <ul class="article-menu__list"
+          #availableList="cdkDropList"
+          cdkDropList
+          [cdkDropListData]="availableMenuItems"
+          [cdkDropListConnectedTo]="[displayedList]"
+          [cdkDropListEnterPredicate]="notLastDisplayedPredicate"
+          (cdkDropListDropped)="dropInAvailable($event)">
+        <li class="article-menu__item"
+            cdkDrag *ngFor="let item of availableMenuItems">{{item.title}}</li>
+      </ul>
+    </section>
+  </div>
+</ng-template>

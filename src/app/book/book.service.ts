@@ -1,10 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
-import {API_ENDPOINT} from '../app.config';
+import {API_ENDPOINT, APP_BREAKPOINTS} from '../app.config';
 import {TranslateService} from '@ngx-translate/core';
+import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
+import {MenuItem} from '../app.model';
 
 @Injectable()
 export class BookService {
@@ -12,18 +14,44 @@ export class BookService {
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
-              @Inject(API_ENDPOINT) private apiEndpoint) {}
+              @Inject(API_ENDPOINT) private apiEndpoint,
+              private breakpointObserver: BreakpointObserver,
+              @Inject(APP_BREAKPOINTS) private breakPoints) {}
 
-  getInterfaceData(lang: string, bookName = this.bookName) {
-    const url = `${this.apiEndpoint}/interface/${lang}/${bookName}`;
+  getInterfaceData(lang: string, bookId = this.bookId) {
+    const url = `${this.apiEndpoint}/interface/${lang}/${bookId}`;
 
     return this.http.get(url).pipe(
       tap(data => this.interfaceState.next(data))
     );
   }
 
-  get bookName() {
+  get bookId() {
     return this.interfaceState.getValue().bookId;
+  }
+
+  get interfaceLangs() {
+    return this.interfaceState.getValue().interfaceLangs;
+  }
+
+  getMainMenu(data = this.interfaceState.getValue().mainMenu) {
+    const mainmenu = [new MenuItem(
+      'LIBRARY',
+      `/${this.translate.currentLang}`
+    )];
+
+    data.forEach((item) => {
+      mainmenu.push(new MenuItem(item.title, item.pageId));
+    });
+
+    return mainmenu;
+  }
+
+  get isDesktop$() {
+    return this.breakpointObserver
+      .observe([this.breakPoints.desktop]).pipe(
+        map((state: BreakpointState) => state.matches)
+      );
   }
 
   get defaultAuthor() {
@@ -33,5 +61,23 @@ export class BookService {
     return sources
       .find(s => s.langId === currentLang)
       .defaultAuthor;
+  }
+
+  getArticleMenu(article, lang) {
+    const url = `${this.apiEndpoint}/interface/${lang}/article-menu/${this.bookId}/${article}`;
+
+    return this.http.get(url);
+  }
+
+  getArticle(article, lang, author) {
+    const url = `${this.apiEndpoint}/article/${lang}/${article}/${author}`;
+
+    return this.http.get(url);
+  }
+
+  getInterfaceLangs(id) {
+    const url = `${this.apiEndpoint}/interface/langs/${id}`;
+
+    return this.http.get(url);
   }
 }

@@ -1,1 +1,30 @@
+@import 'variables.scss';
 
+.article-content__block {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+
+.article-content__line {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  height: calc(100% - 11px);
+  width: 2px;
+}
+
+.article-content__chunk--rtl {
+  direction: rtl;
+}
+
+@media ($tablet-width) {
+  .article-content__block {
+    padding-left: 20px;
+    margin-bottom: 24px;
+  }
+
+  .article-content__line {
+    width: 4px;
+  }
+}

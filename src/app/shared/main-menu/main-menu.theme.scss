@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+@import 'variables.scss';
+
+@mixin main-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .mainmenu__line--color:after {
+    background-color: mat-color($primary, default-contrast);
+  }
+}
+
+@mixin main-menu-typography($config) {
+  .mainmenu__link {
+    //@include mat-button-typography($main-menu-btn-config);
+    font-size: mat-font-size($config, subheading-2);
+  }
+}

@@ -1,33 +1,20 @@
-<mat-toolbar color="primary">
-  <div>
-    <a class="header__logo mat-subheading-2"
-       [routerLink]="'/' + translate.currentLang">Library</a>
-  </div>
-  <div
-    fxFlex
-    fxLayout
-    fxLayoutAlign="flex-start"
-    fxHide.xs
-    fxShow
-  >
-    <ul fxLayout class="header__menu">
-      <li>
-        <a class="header__link"
-           routerLink="about"
-           routerLinkActive="header__link--active"
-           mat-button>About</a>
-      </li>
-      <li>
-        <a class="header__link"
-           routerLink="authors"
-           routerLinkActive="header__link--active"
-           mat-button>Authors</a>
-      </li>
-    </ul>
-  </div>
-  <app-language-menu></app-language-menu>
+<mat-toolbar color="primary" class="header" [dir]="appService.dir">
+  <mat-toolbar-row class="header__row header__row--first mat-elevation-z6">
+    <a class="header__logo mat-headline global-link--primary"
+       [routerLink]="'/' + translate.currentLang">Kabbalah Books</a>
+    <div class="header__spacer-1"></div>
+    <app-main-menu [mainMenuItems]="menuItems"
+                   *ngIf="isDesktop$ | async"></app-main-menu>
+    <div class="header__spacer-2"></div>
+    <app-language-menu [langs]="appLangs"></app-language-menu>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="header__row header__row--second mat-elevation-z1"
+                   appSimpleBar
+                   *ngIf="!(isDesktop$ | async)">
+    <app-sub-menu [subMenuItems]="menuItems"></app-sub-menu>
+  </mat-toolbar-row>
 </mat-toolbar>
-<div class="main__content-wrapper">
+<div class="main__content">
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

@@ -6,17 +6,26 @@ import {MaterialModule} from './material.module';
 import {LanguageMenuComponent} from './language-menu/language-menu.component';
 import {LoadingComponent} from './loading/loading.component';
 import {FooterComponent} from './footer/footer.component';
-import { ContentComponent } from './content/content.component';
+import { PageComponent } from './page/page.component';
+import { SimpleBarDirective } from './simple-bar.directive';
+import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
     LanguageMenuComponent,
     LoadingComponent,
     FooterComponent,
-    ContentComponent
+    PageComponent,
+    SimpleBarDirective,
+    SubMenuComponent,
+    MainMenuComponent,
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule,
     TranslateModule
   ],
@@ -26,7 +35,9 @@ import { ContentComponent } from './content/content.component';
     LanguageMenuComponent,
     LoadingComponent,
     FooterComponent,
-    ContentComponent
+    SimpleBarDirective,
+    SubMenuComponent,
+    MainMenuComponent
   ]
 })
 export class SharedModule { }

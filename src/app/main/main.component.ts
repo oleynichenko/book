@@ -1,39 +1,45 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
-import {MainService} from './main.service';
+import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {APP_CONFIG} from '../app.config';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {
+  BreakpointObserver,
+  BreakpointState
+} from '@angular/cdk/layout';
+
+import {APP_BREAKPOINTS, APP_CONFIG} from '../app.config';
+import {MainService} from './main.service';
+import {map} from 'rxjs/operators';
+import {MenuItem} from '../app.model';
+import {AppService} from '../app.service';
+
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
-  paramSubscription: Subscription;
+export class MainComponent implements OnInit {
+  isDesktop$: Observable<boolean>;
+  menuItems: MenuItem[];
+  appLangs: string[];
 
   constructor(private translate: TranslateService,
               private route: ActivatedRoute,
+              public appService: AppService,
               private mainService: MainService,
-              @Inject(APP_CONFIG) private config) { }
-
-  ngOnInit() {
-    const lang = this.route.parent.snapshot.params.lang;
-
-    this.translate.setDefaultLang(this.config.defaultLang);
-    this.translate.use(lang);
-    this.translate.addLangs(this.config.availableLangs);
-
-    this.paramSubscription = this.route.params.subscribe(
-      (params: Params) => {
-        if (params.lang !== this.translate.currentLang) {
-          this.translate.use(params.lang);
-        }
-    });
+              @Inject(APP_CONFIG) private config,
+              private breakpointObserver: BreakpointObserver,
+              @Inject(APP_BREAKPOINTS) private breakPoints) {
   }
 
-  ngOnDestroy() {
-    this.paramSubscription.unsubscribe();
+  ngOnInit() {
+    this.menuItems = this.mainService.menuItems;
+    this.appLangs = this.config.availableLangs;
+
+    this.isDesktop$ = this.breakpointObserver
+      .observe([this.breakPoints.desktop]).pipe(
+        map((state: BreakpointState) => state.matches)
+      );
   }
 }

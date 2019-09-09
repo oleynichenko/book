@@ -1,40 +1,22 @@
-<mat-toolbar color="primary">
-  <div class="header__menu-icon">
-    <button mat-icon-button (click)="onToggleSidenav()">
+<mat-toolbar color="primary" class="header">
+  <mat-toolbar-row class="header__row header__row--first mat-elevation-z6">
+    <button class="header__menu-icon"
+            mat-icon-button
+            (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
-  </div>
-  <div>
-    <a class="header__logo mat-subheading-2"
-       routerLink="">{{title$ | async}}</a>
-  </div>
-  <div
-    fxFlex
-    fxLayout
-    fxLayoutAlign="flex-start"
-    fxHide.xs
-    fxShow
-  >
-    <ul fxLayout class="header__menu">
-      <li>
-        <a class="header__link"
-           [routerLink]="'/' + translate.currentLang"
-           routerLinkActive="header__link--active"
-           mat-button>Library</a>
-      </li>
-      <li>
-        <a class="header__link"
-           routerLink="about-book"
-           routerLinkActive="header__link--active"
-           mat-button>About book</a>
-      </li>
-      <li>
-        <a class="header__link"
-           routerLink="useful-links"
-           routerLinkActive="header__link--active"
-           mat-button>Useful links</a>
-      </li>
-    </ul>
-  </div>
-  <app-language-menu></app-language-menu>
+    <a class="header__logo global-link--primary"
+       routerLink="about-book">{{title$ | async}}
+    </a>
+    <div class="header__spacer-1"></div>
+    <app-main-menu [mainMenuItems]="menuItems"
+                   *ngIf="isDesktop$ | async"></app-main-menu>
+    <div class="header__spacer-2"></div>
+    <app-language-menu [langs]="intrefaceLangs"></app-language-menu>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="header__row header__row--second mat-elevation-z1"
+                   appSimpleBar
+                   *ngIf="!(isDesktop$ | async)">
+    <app-sub-menu [subMenuItems]="menuItems"></app-sub-menu>
+  </mat-toolbar-row>
 </mat-toolbar>

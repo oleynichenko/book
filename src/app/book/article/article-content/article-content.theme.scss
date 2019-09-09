@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin article-content-theme($theme) {
+  $primary: map-get($theme, accent);
+  //$accent: map-get($theme, accent);
+
+  .article-content__line {
+    background-color: map-get($primary, default);
+  }
+}
+

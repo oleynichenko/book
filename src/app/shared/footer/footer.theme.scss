@@ -1,15 +1,13 @@
 @import '~@angular/material/theming';
 
-@mixin footer-component-theme($theme) {
+@mixin footer-theme($theme) {
   // retrieve variables from theme
   // (all possible variables, use only what you really need)
+  //$is-dark-theme: map-get($theme, is-dark);
   $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $foreground: map-get($theme, foreground);
-  $background: map-get($theme, background);
+  //$accent: map-get($theme, accent);
 
-  .mat-footer {
+  .footer--color {
     @include _mat-toolbar-color($primary);
   }
 }

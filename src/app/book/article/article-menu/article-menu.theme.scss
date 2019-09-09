@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+@import 'variables.scss';
+
+@mixin article-menu-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .article-menu__card, .article-menu__item {
+    background: mat-color($background, card);
+    color: mat-color($foreground, text);
+  }
+
+  .article-menu__list,
+  .article-menu__item {
+    border-color: mat-color($foreground, divider);
+  }
+
+  .article-menu__item.cdk-drag-preview {
+    @include _mat-theme-overridable-elevation(4, $theme);
+  }
+}
+
+@mixin sub-menu-typography($config) {
+  .article-menu__title {
+    @include mat-typography-level-to-styles($config, subheading-2);
+  }
+
+  .article-menu__item {
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+
+  @media ($tablet-width) {
+    .article-menu__title {
+      @include mat-typography-level-to-styles($config, title);
+    }
+  }
+}

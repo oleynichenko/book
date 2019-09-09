@@ -1,0 +1,15 @@
+@import "variables";
+
+:host {
+  display: block;
+  max-width: $max-content-width;
+  margin: 0 auto;
+}
+
+@media ($tablet-width) {
+
+}
+
+@media ($desktop-width) {
+
+}

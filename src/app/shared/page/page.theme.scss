@@ -1,0 +1,7 @@
+@import '../../../../node_modules/@angular/material/theming';
+@import '../../../theme/styling/variables';
+
+@mixin page-typography($config) {
+  @media ($tablet-width) {
+  }
+}

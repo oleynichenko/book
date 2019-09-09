@@ -1,3 +1,37 @@
-:host {
+@import "variables";
+
+.article {
+  max-width: $max-content-width;
   margin: 0 auto;
+}
+
+.article__title {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.article__panel {
+  display: block;
+  margin: 26px 0 24px;
+}
+
+.article__panel--mt {
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+@media ($tablet-width) {
+  .article__title {
+    margin-bottom: 24px;
+  }
+
+  .article__panel {
+    margin-top: 30px;
+    margin-bottom: 32px;
+  }
+
+  .article__panel--mt {
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
 }
