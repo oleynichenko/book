@@ -7,13 +7,29 @@
 @import './theme/custom-component-themes.scss';
 
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+$config: mat-typography-config();
 
+@include mat-core($config);
 @include angular-material-theme($theme);
+
 @include custom-components-theme($theme);
+@include custom-components-typography($config);
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  height: 100%;
+.he-theme {
+  $config-he: mat-typography-config($font-family: 'Rubik');
+
+  @include mat-list-typography($config-he);
+  @include mat-button-typography($config-he);
+  @include mat-menu-typography($config-he);
+
+
+  @include custom-components-typography($config-he);
+}
+
+@import './theme/simplebar.css';
+
+body {
+
 }

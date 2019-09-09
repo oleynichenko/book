@@ -1,3 +1,13 @@
 {
-  "CREATED_BY": "ברוך {{name}}"
+  "CREATED_BY": "Created by",
+  "ABOUT_PROJECT": "על הפרויקט",
+  "LIBRARY": "הספרייה",
+  "AUTHORS": "המחברים",
+  "AUTHOR": "המחבר",
+  "DISPLAYED": "נבחרים",
+  "AVAILABLE": "נגישים",
+  "TEXT": "טקסט",
+  "COMMENTS": "הסברות",
+  "LANGUAGE": "שפה",
+  "TRANSLATIONS": "תרגומים"
 }

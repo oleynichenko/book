@@ -31,7 +31,14 @@
               "node_modules/normalize.css/normalize.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/theme/styling"
+              ]
+            },
+            "scripts": [
+              "./node_modules/simplebar/dist/simplebar.js"
+            ]
           },
           "configurations": {
             "production": {

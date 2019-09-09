@@ -1,3 +1,14 @@
 {
-  "CREATED_BY": "Created by {{name}}"
+  "CREATED_BY": "Created by",
+  "ABOUT_PROJECT": "About project",
+  "LIBRARY": "Library",
+  "AUTHORS": "Authors",
+  "AUTHOR": "Author",
+  "LANGUAGE": "Language",
+  "DISPLAYED": "Displayed",
+  "TEXT": "Text",
+  "COMMENTS": "Comments",
+  "AVAILABLE": "Available",
+  "TRANSLATIONS": "Translations"
+
 }

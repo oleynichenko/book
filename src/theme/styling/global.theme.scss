@@ -1,14 +1,60 @@
 @import '~@angular/material/theming';
 @import 'variables';
 
-@mixin header-typography($config) {
-  .header__logo {
-    @include mat-typography-level-to-styles($config, title);
+
+@mixin global-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .global-link--primary {
+    color: inherit;
+
+    &:hover {
+      color: rgba(mat-color($primary, default-contrast), 0.7);
+    }
+
+    &:active {
+      color: rgba(mat-color($primary, default-contrast), 0.5);
+    }
+  }
+
+  .global-link--accent {
+    color: inherit;
+
+    &:hover {
+      color: rgba(mat-color($accent, default-contrast), 0.7);
+    }
+
+    &:active {
+      color: rgba(mat-color($accent, default-contrast), 0.5);
+    }
+  }
+}
+
+@mixin global-typography($config) {
+  .global-content p {
+    @include mat-typography-level-to-styles($config, subheading-1);
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+
+  .global-content p strong {
+    font-weight: 500;
+  }
+
+  .global-content h1 {
+    @include mat-typography-level-to-styles($config, display-1);
+    margin-top: 0;
   }
 
   @media ($tablet-width) {
-    .header__logo {
-      @include mat-typography-level-to-styles($config, headline);
+    .global-content p {
+      @include mat-typography-level-to-styles($config, subheading-2);
+      margin-bottom: 12px;
+    }
+
+    .global-content h1 {
+      @include mat-typography-level-to-styles($config, display-2);
     }
   }
 }
