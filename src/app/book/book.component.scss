@@ -11,6 +11,7 @@ mat-sidenav {
 mat-sidenav-content {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 // прижать футеp к низу

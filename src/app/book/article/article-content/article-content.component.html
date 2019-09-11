@@ -2,9 +2,9 @@
          *ngIf="content">
   <ng-container *ngFor="let item of content">
     <div [ngClass]="{'article-content__block': item.length > 1}">
-      <div class="article-content__line"
-      *ngIf="item.length > 1"></div>
-      <p [ngClass]="{'article-content__chunk--rtl': chunk.langId === 'he'}"
+      <div class="article-content__line" *ngIf="item.length > 1"></div>
+      <p class="article-content__chunk"
+        [ngClass]="{'article-content__chunk--rtl': chunk.langId === 'he'}"
          *ngFor="let chunk of item">{{chunk.content}}</p>
     </div>
   </ng-container>

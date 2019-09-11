@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -12,6 +12,7 @@ import {BookModule} from './book/book.module';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
+import {LoadingInterceptor} from './shared/loading.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,6 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: API_ENDPOINT, useValue: AppConfig.apiEndpoint},
     {provide: APP_BREAKPOINTS, useValue: AppConfig.breakPoints},
     {provide: APP_CONFIG, useValue: AppConfig}

@@ -47,18 +47,18 @@ export class LanguageMenuComponent implements OnInit, OnDestroy {
       this.langMenu = data;
     });
   }
-  //
-  // changeLanguage(langId) {
-  //   const newLangUrl = this.router.url.replace(
-  //     `/${this.currentLang}`,
-  //     `/${langId}`
-  //   );
-  //
-  //   // для плавного исчезновения langMenu
-  //   setTimeout(() => {
-  //     this.router.navigateByUrl(newLangUrl);
-  //   }, 200);
-  // }
+
+  changeLanguage(langId) {
+    const newLangUrl = this.router.url.replace(
+      `/${this.currentLang}`,
+      `/${langId}`
+    );
+
+    // для плавного исчезновения langMenu
+    setTimeout(() => {
+      this.router.navigateByUrl(newLangUrl);
+    }, 200);
+  }
 
   ngOnDestroy() {
     this.trSubscription.unsubscribe();

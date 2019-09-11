@@ -1,33 +1,52 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
-import {Subscription} from 'rxjs';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Observable} from 'rxjs';
 import {MainService} from '../main.service';
+import {APP_CONFIG} from '../../app.config';
+import {map} from 'rxjs/operators';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.scss']
 })
-export class LibraryComponent implements OnInit, OnDestroy {
-  books: any[];
-  trSubscription: Subscription;
+export class LibraryComponent implements OnInit {
+  books$: Observable<any>;
 
   constructor(private route: ActivatedRoute,
               private translate: TranslateService,
-              private mainService: MainService) { }
+              private mainService: MainService,
+              private appService: AppService,
+              @Inject(APP_CONFIG) private config,
+              private router: Router) { }
 
   ngOnInit() {
-    this.books = this.route.snapshot.data.books;
-
-    this.trSubscription = this.translate.onLangChange.subscribe(
-      (event: LangChangeEvent) => {
-        this.mainService.getLibrary(event.lang)
-          .subscribe((books: any) => this.books = books);
-      });
+    this.books$ = this.route.data.pipe(
+      map((data: any) => data.books)
+    );
   }
 
-  ngOnDestroy() {
-    this.trSubscription.unsubscribe();
+  onBookClick(id) {
+    this.mainService.getInterfaceLangs(id)
+      .subscribe((langs: any[]) => {
+        const requiredInterfaceLang = this.translate.currentLang;
+        let interfaceLang;
+
+        if (langs.includes(requiredInterfaceLang)) {
+          interfaceLang = requiredInterfaceLang;
+        } else if (langs.includes(this.config.defaultLang)) {
+          interfaceLang = this.config.defaultLang;
+        } else {
+          interfaceLang = langs[0];
+        }
+
+        const bookUrl = this.router.url.replace(
+          `/${requiredInterfaceLang}`,
+          `/${interfaceLang}`) + '/' + id;
+
+        this.router.navigateByUrl(bookUrl);
+      });
   }
 }

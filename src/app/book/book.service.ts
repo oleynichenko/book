@@ -21,7 +21,11 @@ export class BookService {
   getInterfaceData(lang: string, bookId = this.bookId) {
     const url = `${this.apiEndpoint}/interface/${lang}/${bookId}`;
 
-    return this.http.get(url).pipe(
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options).pipe(
       tap(data => this.interfaceState.next(data))
     );
   }
@@ -37,7 +41,7 @@ export class BookService {
   getMainMenu(data = this.interfaceState.getValue().mainMenu) {
     const mainmenu = [new MenuItem(
       'LIBRARY',
-      `/${this.translate.currentLang}`
+      `/${this.interfaceState.getValue().langId}`
     )];
 
     data.forEach((item) => {
@@ -70,14 +74,12 @@ export class BookService {
   }
 
   getArticle(article, lang, author) {
-    const url = `${this.apiEndpoint}/article/${lang}/${article}/${author}`;
+    const url = `${this.apiEndpoint}/article/${lang}/${this.bookId}/${article}/${author}`;
 
-    return this.http.get(url);
-  }
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
 
-  getInterfaceLangs(id) {
-    const url = `${this.apiEndpoint}/interface/langs/${id}`;
-
-    return this.http.get(url);
+    return this.http.get(url, options);
   }
 }

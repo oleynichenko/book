@@ -30,6 +30,11 @@ $config: mat-typography-config();
 
 @import './theme/simplebar.css';
 
-body {
 
+html {
+
+}
+
+.overflow-y {
+  overflow-y: scroll;
 }

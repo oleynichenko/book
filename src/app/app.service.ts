@@ -1,30 +1,24 @@
 import {Injectable} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
   dir: 'rtl' | 'ltr';
+  loadingStatus = new BehaviorSubject<boolean>(false);
 
-  constructor(private translate: TranslateService,
-              private router: Router,) {  }
+  constructor() {  }
 
   setDirection(lang) {
     this.dir = (lang === 'he') ? 'rtl' : 'ltr';
   }
 
-  changeLanguageInUrl(langId) {
-    console.log(this.router.url);
-    const newLangUrl = this.router.url.replace(
-      `/${this.translate.currentLang}`,
-      `/${langId}`
-    );
+  startLoading() {
+    this.loadingStatus.next(true);
+  }
 
-    // для плавного исчезновения langMenu
-    setTimeout(() => {
-      this.router.navigateByUrl(newLangUrl);
-    }, 200);
+  stopLoading() {
+    this.loadingStatus.next(false);
   }
 }

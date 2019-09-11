@@ -16,7 +16,6 @@ export class PageResolver implements Resolve<any> {
     const langId = route.parent.parent.params.lang;
 
     let url = `${this.apiEndpoint}/page/${langId}/`;
-
     if (bookId) {
       const pageId = route.params.page;
       url += `${pageId}/${bookId}`;
@@ -25,7 +24,11 @@ export class PageResolver implements Resolve<any> {
       url += `${pageId}`;
     }
 
-    return this.http.get(url).pipe(
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options).pipe(
       map((data: any) => data.content)
     );
   }

@@ -18,7 +18,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   articleId: string;
   paramSubscription: Subscription;
   trSubscription: Subscription;
-  isCommentShown = false;
 
   constructor(private bookService: BookService,
               private commentService: CommentService,
@@ -79,6 +78,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.articles = this.sortArticles(sources, data);
       });
     } else {
+      // для сортировки существующих
       this.articles = this.sortArticles(sources);
     }
   }

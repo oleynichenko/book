@@ -11,7 +11,6 @@ export class LibraryResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<any> {
     const lang = route.parent.params.lang;
-
     return this.mainService.getLibrary(lang);
   }
 }

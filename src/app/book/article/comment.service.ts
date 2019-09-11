@@ -3,10 +3,13 @@ import {HttpClient} from '@angular/common/http';
 
 import {TranslateService} from '@ngx-translate/core';
 import {API_ENDPOINT} from '../../app.config';
+import {BehaviorSubject} from 'rxjs';
 
 // компонент требует переработки
 @Injectable()
 export class CommentService {
+  loadingStatus = new BehaviorSubject<boolean>(false);
+
   langSelect: any;
   langSelectValue: string;
   commentsSelect: any;
@@ -72,10 +75,13 @@ export class CommentService {
 
   setComment(comment) {
     if (comment) {
+      this.loadingStatus.next(true);
+
       const url = `${this.apiEndpoint}/comment/${this.langSelectValue}/${comment.id}/${comment.author}`;
 
       this.http.get(url).subscribe((data: any) => {
         this.comment = data.content;
+        this.loadingStatus.next(false);
       });
     } else {
       this.comment = null;

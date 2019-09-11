@@ -14,6 +14,10 @@
   width: 2px;
 }
 
+.article-content__chunk {
+  direction: ltr;
+}
+
 .article-content__chunk--rtl {
   direction: rtl;
 }

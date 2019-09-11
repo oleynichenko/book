@@ -20,6 +20,16 @@ export class MainService {
   getLibrary(lang) {
     const url = `${this.apiEndpoint}/library/${lang}/${this.config.library}`;
 
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options);
+  }
+
+  getInterfaceLangs(id) {
+    const url = `${this.apiEndpoint}/interface/langs/${id}`;
+
     return this.http.get(url);
   }
 }
