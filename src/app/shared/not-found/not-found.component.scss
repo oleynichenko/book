@@ -1,0 +1,7 @@
+@import 'variables.scss';
+
+:host {
+  display: block;
+  max-width: $max-content-width;
+  margin: 0 auto;
+}

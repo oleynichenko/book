@@ -9,7 +9,7 @@ export class BookResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<any> {
-    const interfaceLang = route.parent.params.lang;
+    const interfaceLang = route.params.lang;
     const bookId = route.params.book;
 
     return this.bookService.getInterfaceData(interfaceLang, bookId);

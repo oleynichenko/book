@@ -1,1 +1,12 @@
 libraryResolver works on PageComponent
+
+Instruction
+1. Create angular project + fix versions
+2. Git init + load on github "initial"
+3. Install project dependencies
+4. Add fonts in index.html
+5. setup style.scss
+- change css to scss in angular.json
+- add "node_modules/normalize.css/normalize.css" in angular.json
+- transfer folder theme
+- add components checking custom-components-theme

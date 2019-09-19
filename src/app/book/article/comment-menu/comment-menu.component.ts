@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {CommentService} from '../comment.service';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';

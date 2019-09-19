@@ -13,7 +13,7 @@ export class PageResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<any> {
     const bookId = route.parent.params.book;
-    const langId = route.parent.parent.params.lang;
+    const langId = route.parent.params.lang;
 
     let url = `${this.apiEndpoint}/page/${langId}/`;
     if (bookId) {

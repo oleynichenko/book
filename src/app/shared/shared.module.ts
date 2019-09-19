@@ -12,6 +12,7 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 
 import {RouterModule} from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {RouterModule} from '@angular/router';
     SimpleBarDirective,
     SubMenuComponent,
     MainMenuComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

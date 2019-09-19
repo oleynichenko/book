@@ -1,7 +1,6 @@
 <article class="global-content comment"
          [ngClass]="{'comment--rtl': commentService.langSelect === 'he'}"
-         [innerHTML]="commentService.comment"
-          >
+         [innerHTML]="commentService.comment">
 </article>
 <app-loading *ngIf="isLoading$ | async"></app-loading>
 

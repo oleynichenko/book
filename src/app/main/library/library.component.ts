@@ -44,7 +44,7 @@ export class LibraryComponent implements OnInit {
 
         const bookUrl = this.router.url.replace(
           `/${requiredInterfaceLang}`,
-          `/${interfaceLang}`) + '/' + id;
+          `/${interfaceLang}`) + '/library/' + id;
 
         this.router.navigateByUrl(bookUrl);
       });
