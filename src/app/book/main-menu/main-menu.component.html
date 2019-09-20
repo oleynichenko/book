@@ -1,0 +1,9 @@
+<ul class="mainmenu">
+  <li *ngFor="let item of mainMenuItems">
+    <a class="mainmenu__link"
+       [routerLink]="item.id"
+       routerLinkActive="mainmenu__line mainmenu__line--color"
+       [routerLinkActiveOptions]= "{exact: true}"
+       mat-button>{{item.title}}</a>
+  </li>
+</ul>

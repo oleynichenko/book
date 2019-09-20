@@ -1,0 +1,18 @@
+@import '../../../../node_modules/@angular/material/theming';
+@import 'variables';
+
+@mixin sub-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .submenu__link-line:after {
+    background-color: mat-color($primary, default-contrast);
+  }
+}
+
+@mixin sub-menu-typography($config) {
+  @media ($tablet-width) {
+    .submenu__link {
+      font-size: mat-font-size($config, subheading-2);
+    }
+  }
+}

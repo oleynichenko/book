@@ -29,10 +29,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
       mergeMap((params: Params) => {
         this.articles = [];
         this.articleId = params.id;
-
         return forkJoin([
           this.bookService.getArticleMenu(this.articleId, this.translate.currentLang),
-          this.commentService.getCommentMenu(this.translate.currentLang, this.articleId, this.bookService.bookId)
+          this.commentService.getCommentMenu(this.translate.currentLang, this.articleId)
         ]);
       })
     ).subscribe(([articleMenuData, commentMenuData]: any[]) => {

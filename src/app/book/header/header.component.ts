@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import {map, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+
 import {BookService} from '../book.service';
 import {MenuItem} from '../../app.model';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -13,30 +14,26 @@ import {TranslateService} from '@ngx-translate/core';
 
 export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
-  title$: Observable<string>;
+  title: string;
   menuItems: MenuItem[];
   isDesktop$: Observable<boolean>;
-  intrefaceLangs: string[];
+  suscription: Subscription;
 
   constructor(private translate: TranslateService,
               private bookService: BookService) { }
 
   ngOnInit() {
-    this.intrefaceLangs = this.bookService.interfaceLangs;
-    this.menuItems = this.bookService.getMainMenu();
-
-    this.title$ = this.bookService.interfaceState
-      .pipe(
-        tap(data => {
-          this.menuItems = this.bookService.getMainMenu(data.mainMenu);
-        }),
-        map(data => data.title)
-      );
+    this.suscription = this.bookService.bookData
+      .subscribe(data => {
+        this.menuItems = data.mainMenu;
+        this.title = data.title;
+      });
 
     this.isDesktop$ = this.bookService.isDesktop$;
   }
 
   onToggleSidenav() {
     this.sidenavToggle.emit();
+    this.suscription.unsubscribe();
   }
 }

@@ -1,0 +1,30 @@
+@import 'variables';
+
+.footer {
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__item {
+  margin: 0;
+}
+
+.footer__link {
+  text-decoration: none;
+}
+
+@media ($tablet-width) {
+  .footer {
+    min-height: 56px;
+    padding: 0 24px;
+  }
+}
+
+@media ($desktop-width) {
+  .footer {
+    padding: 0 32px;
+  }
+}

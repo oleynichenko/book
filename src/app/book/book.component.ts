@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {AppService} from '../app.service';
-import {TranslateService} from '@ngx-translate/core';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+
+import {BookService} from './book.service';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book',
@@ -13,29 +15,36 @@ import {Subscription} from 'rxjs';
 export class BookComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
 
-  paramsSubscription: Subscription;
+  isLoading$: Observable<boolean>;
+  trSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
-              public appService: AppService,
+              public bookService: BookService,
               private translate: TranslateService,
               private renderer: Renderer2) {
-    appService.renderer = renderer;
+    bookService.renderer = renderer;
   }
 
   ngOnInit() {
     const lang = this.route.snapshot.params.lang;
-    this.appService.setDirection(lang);
-    this.translate.use(lang);
 
-    this.paramsSubscription = this.route.params
-      .subscribe((params: Params) => {
-        this.translate.use(params.lang);
-        this.appService.setDirection(params.lang);
-        this.appService.changeTypography(params.lang);
+    this.translate.setDefaultLang(lang);
+    this.bookService.setDirection(lang);
+    this.bookService.changeTypography(lang);
+
+    this.trSubscription = this.translate.onLangChange
+      .subscribe(
+      (event: LangChangeEvent) => {
+        this.bookService.setDirection(event.lang);
+        this.bookService.changeTypography(event.lang);
       });
+
+    this.isLoading$ = this.bookService.loadingStatus.pipe(
+      debounceTime(300)
+    );
   }
 
   ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
+    this.trSubscription.unsubscribe();
   }
 }

@@ -1,0 +1,11 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+          (click)="onLangMenuItemClick(item.langId)"
+          *ngFor="let item of langMenu$ | async">
+    <mat-icon *ngIf="item.langId === translate.currentLang">check</mat-icon>
+    {{item.name}}
+  </button>
+</mat-menu>

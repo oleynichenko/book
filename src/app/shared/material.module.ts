@@ -5,7 +5,7 @@ import {
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
   MatListModule, MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
@@ -33,6 +33,7 @@ const items = [
   MatSelectModule,
   LayoutModule,
   OverlayModule,
+  MatSnackBarModule,
   MatTabsModule
 ];
 

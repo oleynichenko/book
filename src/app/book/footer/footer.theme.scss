@@ -1,0 +1,31 @@
+@import '../../../../node_modules/@angular/material/theming';
+
+@mixin footer-theme($theme) {
+  // retrieve variables from theme
+  // (all possible variables, use only what you really need)
+  //$is-dark-theme: map-get($theme, is-dark);
+  $primary: map-get($theme, primary);
+  //$accent: map-get($theme, accent);
+
+  .footer--color {
+    @include _mat-toolbar-color($primary);
+  }
+}
+
+//@mixin footer-component-typography($config) {
+//  @if $config == null {
+//    $config: mat-typography-config();
+//  }
+//
+//  .mat-footer,
+//  .mat-footer h1,
+//  .mat-footer h2,
+//  .mat-footer h3,
+//  .mat-footer h4,
+//  .mat-footer h5,
+//  .mat-footer h6 {
+//    @include mat-typography-level-to-styles($config, title);
+//    margin: 0;
+//  }
+//}
+

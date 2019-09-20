@@ -1,0 +1,9 @@
+<ul class="submenu">
+  <li *ngFor="let item of subMenuItems">
+    <a class="submenu__link"
+       [routerLink]="item.id"
+       routerLinkActive="submenu__link-line"
+       [routerLinkActiveOptions]= "{exact: true}"
+       mat-button>{{item.title}}</a>
+  </li>
+</ul>

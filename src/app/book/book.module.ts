@@ -12,6 +12,7 @@ import { CommentComponent } from './article/comment/comment.component';
 import {ArticleContentComponent} from './article/article-content/article-content.component';
 import { CommentMenuComponent } from './article/comment-menu/comment-menu.component';
 import {CommentService} from './article/comment.service';
+import {LanguageMenuService} from './language-menu/language-menu.service';
 
 
 @NgModule({
@@ -33,6 +34,6 @@ import {CommentService} from './article/comment.service';
   exports: [
     AppRoutingModule
   ],
-  providers: [BookService, CommentService]
+  providers: [BookService, CommentService, LanguageMenuService]
 })
 export class BookModule { }

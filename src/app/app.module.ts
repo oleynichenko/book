@@ -11,8 +11,9 @@ import {SharedModule} from './shared/shared.module';
 import {BookModule} from './book/book.module';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MainModule} from './main/main.module';
-import {LoadingInterceptor} from './shared/loading.interceptor';
+import {LoadingInterceptor} from './book/loading.interceptor';
+import {ErrorComponent} from './error/error.component';
+import {ServerErrorInterceptor} from './server-error.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -20,7 +21,8 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -35,11 +37,11 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     SharedModule,
     BookModule,
-    MainModule,
     AppRoutingModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true},
     {provide: API_ENDPOINT, useValue: AppConfig.apiEndpoint},
     {provide: APP_BREAKPOINTS, useValue: AppConfig.breakPoints},
     {provide: APP_CONFIG, useValue: AppConfig}

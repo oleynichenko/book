@@ -1,66 +1,81 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, Renderer2} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
-import {API_ENDPOINT, APP_BREAKPOINTS} from '../app.config';
+import {API_ENDPOINT, APP_BREAKPOINTS, APP_CONFIG} from '../app.config';
 import {TranslateService} from '@ngx-translate/core';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {MenuItem} from '../app.model';
+import {MatSnackBar} from '@angular/material';
+import {Direction} from '@angular/cdk/bidi';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class BookService {
-  interfaceState = new BehaviorSubject(null);
+  dir: Direction;
+  loadingStatus = new BehaviorSubject<boolean>(false);
+  renderer: Renderer2;
+
+  bookData = new BehaviorSubject(null);
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
-              @Inject(API_ENDPOINT) private apiEndpoint,
+              private router: Router,
               private breakpointObserver: BreakpointObserver,
-              @Inject(APP_BREAKPOINTS) private breakPoints) {}
+              private snackBar: MatSnackBar,
+              @Inject(APP_CONFIG) private config) {}
 
-  getInterfaceData(lang: string, bookId = this.bookId) {
-    const url = `${this.apiEndpoint}/interface/${lang}/${bookId}`;
+
+  setDirection(lang) {
+    this.dir = (lang === 'he') ? 'rtl' : 'ltr';
+  }
+
+  startLoading() {
+    this.loadingStatus.next(true);
+  }
+
+  stopLoading() {
+    this.loadingStatus.next(false);
+  }
+
+  changeTypography(lang) {
+    if (lang === 'he') {
+      this.renderer.addClass(document.body, 'he-theme');
+    } else {
+      this.renderer.removeClass(document.body, 'he-theme');
+    }
+  }
+
+  showSnackBar(message, action, duration) {
+    this.snackBar.open(message, action, {duration});
+  }
+
+  getBookData(lang: string) {
+    const url = `${this.config.apiEndpoint}/book/${lang}/${this.config.book}`;
 
     const options = {
       headers: {appInterfaceDisabled: 'true'}
     };
 
     return this.http.get(url, options).pipe(
-      tap(data => this.interfaceState.next(data))
+      tap((data: any) => {
+        this.bookData.next(data);
+        this.translate.use(data.langId);
+      })
     );
-  }
-
-  get bookId() {
-    return this.interfaceState.getValue().bookId;
-  }
-
-  get interfaceLangs() {
-    return this.interfaceState.getValue().interfaceLangs;
-  }
-
-  getMainMenu(data = this.interfaceState.getValue().mainMenu) {
-    const mainmenu = [new MenuItem(
-      'LIBRARY',
-      `/${this.interfaceState.getValue().langId}`
-    )];
-
-    data.forEach((item) => {
-      mainmenu.push(new MenuItem(item.title, item.pageId));
-    });
-
-    return mainmenu;
   }
 
   get isDesktop$() {
     return this.breakpointObserver
-      .observe([this.breakPoints.desktop]).pipe(
+      .observe([this.config.breakPoints.desktop]).pipe(
         map((state: BreakpointState) => state.matches)
       );
   }
 
   get defaultAuthor() {
     const currentLang = this.translate.currentLang;
-    const sources = this.interfaceState.getValue().sources;
+    const sources = this.bookData.getValue().sources;
 
     return sources
       .find(s => s.langId === currentLang)
@@ -68,18 +83,37 @@ export class BookService {
   }
 
   getArticleMenu(article, lang) {
-    const url = `${this.apiEndpoint}/interface/${lang}/article-menu/${this.bookId}/${article}`;
+    const url = `${this.config.apiEndpoint}/book/${lang}/article-menu/${this.config.book}/${article}`;
 
     return this.http.get(url);
   }
 
   getArticle(article, lang, author) {
-    const url = `${this.apiEndpoint}/article/${lang}/${this.bookId}/${article}/${author}`;
+    const url = `${this.config.apiEndpoint}/article/${lang}/${this.config.book}/${article}/${author}`;
 
     const options = {
       headers: {appInterfaceDisabled: 'true'}
     };
 
     return this.http.get(url, options);
+  }
+
+  getBookLangs() {
+    const url = `${this.config.apiEndpoint}/book/langs/${this.config.book}`;
+
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options);
+  }
+
+  onLangMenuChanges(langId) {
+    const newLangUrl = this.router.url.replace(
+      `/${this.translate.currentLang}`,
+      `/${langId}`
+    );
+
+    this.router.navigateByUrl(newLangUrl);
   }
 }

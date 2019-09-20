@@ -6,13 +6,13 @@
       <mat-icon>menu</mat-icon>
     </button>
     <a class="header__logo global-link--primary"
-       routerLink="about-book">{{title$ | async}}
+       routerLink="about">{{title}}
     </a>
     <div class="header__spacer-1"></div>
     <app-main-menu [mainMenuItems]="menuItems"
                    *ngIf="isDesktop$ | async"></app-main-menu>
     <div class="header__spacer-2"></div>
-    <app-language-menu [langs]="intrefaceLangs"></app-language-menu>
+    <app-language-menu></app-language-menu>
     <div class="header__spacer-3"></div>
   </mat-toolbar-row>
   <mat-toolbar-row class="header__row header__row--second mat-elevation-z1"

@@ -1,12 +1,10 @@
 {
   "CREATED_BY": "Разработка",
-  "ABOUT_PROJECT": "О проекте",
   "LIBRARY": "Библиотека",
-  "AUTHORS": "Авторы",
-  "AUTHOR": "Автор",
   "LANGUAGE": "Язык",
   "DISPLAYED": "Выбранные",
   "AVAILABLE": "Доступные",
+  "AUTHOR": "Автор",
   "TEXT": "Текст",
   "COMMENTS": "Комментарии",
   "TRANSLATIONS": "Переводы"

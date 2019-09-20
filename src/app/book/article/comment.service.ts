@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {TranslateService} from '@ngx-translate/core';
-import {API_ENDPOINT} from '../../app.config';
+import {API_ENDPOINT, APP_CONFIG} from '../../app.config';
 import {BehaviorSubject} from 'rxjs';
 
 // компонент требует переработки
@@ -18,10 +18,11 @@ export class CommentService {
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
+              @Inject(APP_CONFIG) private config,
               @Inject(API_ENDPOINT) private apiEndpoint) { }
 
-  getCommentMenu(lang, article, book) {
-    const url = `${this.apiEndpoint}/interface/${lang}/comment-menu/${book}/${article}`;
+  getCommentMenu(lang, article) {
+    const url = `${this.apiEndpoint}/book/${lang}/comment-menu/${this.config.book}/${article}`;
 
     return this.http.get(url);
   }
@@ -61,7 +62,7 @@ export class CommentService {
   // изменение языка отображения в CommentMenu
   changeCommentMenuTranslation(lang) {
     const langs = this.langSelect.map((i) => i.langId).join('-');
-    const url = `${this.apiEndpoint}/interface/${lang}/lang-menu/${langs}`;
+    const url = `${this.apiEndpoint}/langs/${lang}/${langs}`;
 
     this.http.get(url).subscribe((data: any) => {
       const newLangSelect = this.langSelect.map((i) => {

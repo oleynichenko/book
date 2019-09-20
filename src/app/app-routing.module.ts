@@ -1,68 +1,44 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BookComponent} from './book/book.component';
+
 import {ArticleComponent} from './book/article/article.component';
 import {AppConfig} from './app.config';
-import {MainComponent} from './main/main.component';
-import {PageComponent} from './shared/page/page.component';
-import {AppComponent} from './app.component';
-import {LibraryComponent} from './main/library/library.component';
+import {PageComponent} from './book/page/page.component';
 import {BookResolver} from './book/book.resolver';
-import {PageResolver} from './shared/page/page.resolver';
-import {LibraryResolver} from './main/library/library.resolver';
-import {NotFoundComponent} from './shared/not-found/not-found.component';
-import {LangGuardService} from './shared/lang-guard.service';
-
-// const routes: Routes = [
-//   {path: '', redirectTo: `${AppConfig.defaultLang}`, pathMatch: 'full'},
-//
-//   {path: ':lang', component: AppComponent, children: [
-//     {path: '', resolve: {books: LibraryResolver}, component: MainComponent, children: [
-//       {path: '', component: LibraryComponent},
-//       {path: 'about', resolve: {content: PageResolver}, component: PageComponent},
-//       {path: 'authors', resolve: {content: PageResolver}, component: PageComponent}
-//     ]},
-//
-//     {path: ':book', resolve: {interfaceLangs: BookResolver}, component: BookComponent, children: [
-//       {path: '', redirectTo: 'about-book', pathMatch: 'full'},
-//       {path: 'article/:id', component: ArticleComponent},
-//       {path: ':page', resolve: {content: PageResolver}, component: PageComponent}
-//     ]}
-//   ]},
-//
-//   {path: '404', component: NotFoundComponent},
-//   {path: '**', redirectTo: '/404'}
-// ];
+import {PageResolver} from './book/page/page.resolver';
+import {LangGuardService} from './lang-guard.service';
+import {RoutesNames} from './app.model';
+import {ErrorComponent} from './error/error.component';
+import {BookComponent} from './book/book.component';
 
 const routes: Routes = [
   {path: '', redirectTo: `${AppConfig.defaultLang}`, pathMatch: 'full'},
-  {path: 'not-found', redirectTo: `${AppConfig.defaultLang}/not-found`},
+  {path: RoutesNames.ERROR, component: ErrorComponent},
 
   {path: ':lang',
-    component: MainComponent,
+    component: BookComponent,
     canActivate: [LangGuardService],
+    resolve: {library: BookResolver},
     children: [
-      {path: '', resolve: {books: LibraryResolver}, component: LibraryComponent},
-      {path: 'about', resolve: {content: PageResolver}, component: PageComponent},
-      {path: 'authors', resolve: {content: PageResolver}, component: PageComponent},
-      {path: 'library', resolve: {books: LibraryResolver}, component: LibraryComponent},
-      {path: 'not-found', component: NotFoundComponent}
-    ]
-  },
-
-  {path: ':lang/library/:book', resolve: {interfaceLangs: BookResolver}, component: BookComponent, children: [
-    {path: '', redirectTo: 'about-book', pathMatch: 'full'},
-    {path: 'article/:id', component: ArticleComponent},
-    {path: ':page', resolve: {content: PageResolver}, component: PageComponent}
-  ]},
-  {path: '**', redirectTo: `${AppConfig.defaultLang}/not-found`}
+      {path: '', redirectTo: `${RoutesNames.ABOUT}`, pathMatch: 'full'},
+      {path: `${RoutesNames.ARTICLE}/:id`, component: ArticleComponent},
+      {path: ':page',
+        resolve: {content: PageResolver},
+        component: PageComponent
+      }
+    ]},
+  {path: '**', component: ErrorComponent}
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
   ],
-  providers: [BookResolver, PageResolver, LibraryResolver],
+  providers: [
+    LangGuardService,
+    BookResolver,
+    PageResolver
+  ],
   exports: [
     RouterModule
   ]

@@ -3,7 +3,6 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 import {BookService} from '../book.service';
-import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -15,16 +14,15 @@ export class SidenavListComponent implements OnInit {
 
   sideMenu$: Observable<any>;
 
-  constructor(private bookService: BookService,
-              private appService: AppService) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
-    this.sideMenu$ = this.bookService.interfaceState
+    this.sideMenu$ = this.bookService.bookData
       .pipe(map(data => data.sideMenu));
   }
 
   onClose() {
     this.closeSidenav.emit();
-    this.appService.startLoading();
+    this.bookService.startLoading();
   }
 }
