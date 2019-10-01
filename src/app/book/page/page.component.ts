@@ -13,7 +13,7 @@ export class PageComponent implements OnInit {
   content$: Observable<any>;
 
   constructor(private route: ActivatedRoute,
-              private bookService: BookService) { }
+              public bookService: BookService) { }
 
   ngOnInit() {
     this.content$ = this.route.data.pipe(

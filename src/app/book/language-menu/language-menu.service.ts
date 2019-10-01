@@ -1,10 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Langs} from '../../app.model';
-import {API_ENDPOINT} from '../../app.config';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
+
+import {Langs} from '../../app.model';
 import {BookService} from '../book.service';
+import {API_URL} from '../../app.config';
 
 @Injectable()
 export class LanguageMenuService {
@@ -12,18 +14,20 @@ export class LanguageMenuService {
 
   constructor(private http: HttpClient,
               private bookService: BookService,
-              @Inject(API_ENDPOINT) private apiEndpoint) { }
+              private translate: TranslateService,
+              @Inject(API_URL) private apiUrl) { }
 
   getLangMenu(lang: string, langs: Langs) {
-    const langsString = langs.join('-');
-    const url = `${this.apiEndpoint}/langs/${lang}/${langsString}`;
+    const url = this.apiUrl.getLangsUrl(lang, langs);
 
     return this.http.get(url).pipe(
-      tap((data: any[]) => this.langMenu.next(data))
+      tap((data: any[]) => {
+        this.langMenu.next(data);
+      })
     );
   }
 
   onLangChanging(lang) {
-    this.bookService.onLangMenuChanges(lang);
+    this.bookService.navigateByLangUrl(lang);
   }
 }

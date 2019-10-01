@@ -12,7 +12,7 @@
       <app-article-content [articles]="articles"></app-article-content>
     </mat-tab>
     <mat-tab label="{{'COMMENTS' | translate}}"
-             *ngIf="commentService.langSelect">
+             *ngIf="hasComments">
       <app-comment-menu
         class="article__panel article__panel--mt"></app-comment-menu>
       <app-comment></app-comment>

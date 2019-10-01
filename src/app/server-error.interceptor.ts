@@ -25,6 +25,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
             }
           );
         } else if (error.status === 0) {
+          console.log(error);
           const serverError = new ServerError('Server is Unavailable');
           const errorData = new ErrorData(serverError, error.status, error.statusText);
 

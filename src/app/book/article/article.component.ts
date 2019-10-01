@@ -18,6 +18,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   articleId: string;
   paramSubscription: Subscription;
   trSubscription: Subscription;
+  hasComments: boolean;
 
   constructor(private bookService: BookService,
               private commentService: CommentService,
@@ -27,20 +28,25 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramSubscription = this.route.params.pipe(
       mergeMap((params: Params) => {
+        const lang = this.translate.currentLang;
         this.articles = [];
         this.articleId = params.id;
+
         return forkJoin([
-          this.bookService.getArticleMenu(this.articleId, this.translate.currentLang),
-          this.commentService.getCommentMenu(this.translate.currentLang, this.articleId)
+          this.bookService.getArticleMenu(this.articleId, lang),
+          this.commentService.getCommentMenu(this.articleId, lang)
         ]);
       })
     ).subscribe(([articleMenuData, commentMenuData]: any[]) => {
       if (articleMenuData && articleMenuData.length > 0) {
         this.articleMenuData = articleMenuData;
+        // название статьи берем с меню
         this.articleTitle = this.getArticleTitle(this.translate.currentLang);
         this.commentService.setCommentMenu(commentMenuData);
+        this.hasComments = (commentMenuData && commentMenuData.length > 0);
       } else {
         // поставить заглушку 404
+        // возможно добавить блок с предложением об участии в переводах
       }
     });
 
@@ -82,7 +88,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getArticleTitle(lang) {
+  private getArticleTitle(lang: string): string {
     let defaultArticleData = this.articleMenuData
       .find(i => i.langId === lang && i.authorId === this.bookService.defaultAuthor);
 

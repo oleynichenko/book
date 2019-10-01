@@ -13,6 +13,12 @@ import {ArticleContentComponent} from './article/article-content/article-content
 import { CommentMenuComponent } from './article/comment-menu/comment-menu.component';
 import {CommentService} from './article/comment.service';
 import {LanguageMenuService} from './language-menu/language-menu.service';
+import {PageComponent} from './page/page.component';
+import {LanguageMenuComponent} from './language-menu/language-menu.component';
+import {MainMenuComponent} from './main-menu/main-menu.component';
+import {SubMenuComponent} from './sub-menu/sub-menu.component';
+import {FooterComponent} from './footer/footer.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -24,15 +30,22 @@ import {LanguageMenuService} from './language-menu/language-menu.service';
     ArticleMenuComponent,
     CommentComponent,
     ArticleContentComponent,
-    CommentMenuComponent
+    CommentMenuComponent,
+    LanguageMenuComponent,
+    PageComponent,
+    MainMenuComponent,
+    FooterComponent,
+    SubMenuComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    TranslateModule,
     AppRoutingModule
   ],
   exports: [
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule
   ],
   providers: [BookService, CommentService, LanguageMenuService]
 })

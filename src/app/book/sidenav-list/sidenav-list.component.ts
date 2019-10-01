@@ -23,6 +23,6 @@ export class SidenavListComponent implements OnInit {
 
   onClose() {
     this.closeSidenav.emit();
-    this.bookService.startLoading();
+    // this.bookService.startLoading();
   }
 }

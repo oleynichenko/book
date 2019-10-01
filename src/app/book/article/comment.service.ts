@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {TranslateService} from '@ngx-translate/core';
-import {API_ENDPOINT, APP_CONFIG} from '../../app.config';
+import {API_URL, APP_CONFIG} from '../../app.config';
 import {BehaviorSubject} from 'rxjs';
 
 // компонент требует переработки
@@ -19,10 +19,10 @@ export class CommentService {
   constructor(private http: HttpClient,
               private translate: TranslateService,
               @Inject(APP_CONFIG) private config,
-              @Inject(API_ENDPOINT) private apiEndpoint) { }
+              @Inject(API_URL) private apiUrl) { }
 
-  getCommentMenu(lang, article) {
-    const url = `${this.apiEndpoint}/book/${lang}/comment-menu/${this.config.book}/${article}`;
+  getCommentMenu(article, lang) {
+    const url = this.apiUrl.getCommentMenu(article, lang);
 
     return this.http.get(url);
   }
@@ -46,13 +46,11 @@ export class CommentService {
       }).comments;
 
       this.commentsSelect = comments.map((c: any) => {
-        return {
-          id: c.commentId,
-          author: c.authorId,
-          title: (c.title)
-            ? `${c.title} - ${c.authorName}`
-            : c.authorName
-        };
+        c.title = (c.title)
+          ? `${c.title} - ${c.authorName}`
+          : c.authorName;
+
+        return c;
       });
     } else {
       this.commentsSelect = null;
@@ -61,24 +59,24 @@ export class CommentService {
 
   // изменение языка отображения в CommentMenu
   changeCommentMenuTranslation(lang) {
-    const langs = this.langSelect.map((i) => i.langId).join('-');
-    const url = `${this.apiEndpoint}/langs/${lang}/${langs}`;
+    const langs = this.langSelect.map((i) => i.langId);
 
-    this.http.get(url).subscribe((data: any) => {
-      const newLangSelect = this.langSelect.map((i) => {
-        i.name = data.find((j) => j.langId === i.langId).name;
-        return i;
+    this.http.get(this.apiUrl.getLangsUrl(lang, langs))
+      .subscribe((data: any) => {
+        const newLangSelect = this.langSelect.map((i) => {
+          i.name = data.find((j) => j.langId === i.langId).name;
+          return i;
+        });
+
+        this.setLangSelect(newLangSelect);
       });
-
-      this.setLangSelect(newLangSelect);
-    });
   }
 
   setComment(comment) {
     if (comment) {
       this.loadingStatus.next(true);
 
-      const url = `${this.apiEndpoint}/comment/${this.langSelectValue}/${comment.id}/${comment.author}`;
+      const url = this.apiUrl.getCommentUrl(comment.id, this.langSelectValue, comment.author, comment.article);
 
       this.http.get(url).subscribe((data: any) => {
         this.comment = data.content;

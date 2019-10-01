@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import 'variables.scss';
+@import 'variables';
 
 @mixin article-menu-theme($theme) {
   $background: map-get($theme, background);

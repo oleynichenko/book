@@ -10,3 +10,13 @@ Instruction
 - add "node_modules/normalize.css/normalize.css" in angular.json
 - transfer folder theme
 - add components checking custom-components-theme
+
+
+Tasks
+сделать для PagеComponent отдельный loading компонент иначе есть разрыв в загрузке с запросом на книгу при смене языка.
+
+Сделать интерсептор на домен имя. Летит работа translate
+
+почему перегрузка при клике на home c error page?
+
+schema with subdomains: think of

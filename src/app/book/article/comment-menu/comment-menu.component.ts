@@ -11,7 +11,7 @@ import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 export class CommentMenuComponent implements OnInit, OnDestroy {
   trSubscription: Subscription;
 
-  constructor(private commentService: CommentService,
+  constructor(public commentService: CommentService,
               private translate: TranslateService) { }
 
   ngOnInit() {

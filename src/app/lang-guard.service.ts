@@ -9,13 +9,13 @@ import {BookService} from './book/book.service';
 export class LangGuardService implements CanActivate {
 
   constructor(private router: Router,
-              private libraryService: BookService) { }
+              private bookService: BookService) { }
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot) {
     const lang = route.params.lang;
 
-    return this.libraryService.getBookLangs().pipe(
+    return this.bookService.getBookLangs().pipe(
       map((langs: any[]) => {
         if (langs.includes(lang)) {
           return true;

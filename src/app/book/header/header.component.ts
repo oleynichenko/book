@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {map, tap} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 
 import {BookService} from '../book.service';
@@ -12,7 +11,7 @@ import {MenuItem} from '../../app.model';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter<void>();
   title: string;
   menuItems: MenuItem[];
@@ -34,6 +33,9 @@ export class HeaderComponent implements OnInit {
 
   onToggleSidenav() {
     this.sidenavToggle.emit();
+  }
+
+  ngOnDestroy() {
     this.suscription.unsubscribe();
   }
 }

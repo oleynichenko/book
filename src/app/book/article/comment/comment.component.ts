@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 export class CommentComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
-  constructor(private commentService: CommentService) { }
+  constructor(public commentService: CommentService) { }
 
   ngOnInit() {
     this.isLoading$ = this.commentService.loadingStatus.pipe(

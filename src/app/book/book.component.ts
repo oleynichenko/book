@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 
 import {BookService} from './book.service';
@@ -32,8 +32,7 @@ export class BookComponent implements OnInit, OnDestroy {
     this.bookService.setDirection(lang);
     this.bookService.changeTypography(lang);
 
-    this.trSubscription = this.translate.onLangChange
-      .subscribe(
+    this.trSubscription = this.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.bookService.setDirection(event.lang);
         this.bookService.changeTypography(event.lang);

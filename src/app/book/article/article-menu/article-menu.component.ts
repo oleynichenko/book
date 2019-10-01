@@ -37,7 +37,6 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
           });
         });
 
-        this.menuChanged.emit(this.displayedMenuItems);
       } else {
         const defaultMenuItemIndex = this.getDefaultMenuItemIndex(value);
         this.displayedMenuItems = [value[defaultMenuItemIndex]];
@@ -45,6 +44,8 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
         this.availableMenuItems = [...value];
         this.availableMenuItems.splice(defaultMenuItemIndex, 1);
       }
+
+      this.menuChanged.emit(this.displayedMenuItems);
     }
   }
 
@@ -53,6 +54,7 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
   availableMenuItems: MenuItem[];
   displayedMenuItems: MenuItem[];
   trSubscription: Subscription;
+  isLangRtl: boolean;
 
   constructor(private translate: TranslateService,
               private bookService: BookService) { }
@@ -60,6 +62,7 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const defaultMenuItemIndex = this.getDefaultMenuItemIndex(this._menu);
     this.displayedMenuItems = [this._menu[defaultMenuItemIndex]];
+    this.isLangRtl = this.translate.currentLang === 'he';
 
     this.availableMenuItems = [...this._menu];
     this.availableMenuItems.splice(defaultMenuItemIndex, 1);
@@ -71,6 +74,7 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
           .subscribe((data: any) => {
             this.displayedMenuItems = this.changeTitle(this.displayedMenuItems, data);
             this.availableMenuItems = this.changeTitle(this.availableMenuItems, data);
+            this.isLangRtl = this.translate.currentLang === 'he';
           });
       });
   }

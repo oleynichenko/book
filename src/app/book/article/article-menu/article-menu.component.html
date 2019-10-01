@@ -20,6 +20,7 @@
           [cdkDropListConnectedTo]="[availableList]"
           (cdkDropListDropped)="dropInDisplayed($event)">
         <li class="article-menu__item"
+            [ngClass]="{'article-menu__item--rtl': isLangRtl}"
             cdkDrag *ngFor="let item of displayedMenuItems">{{item.title}}</li>
       </ul>
     </section>
@@ -33,6 +34,7 @@
           [cdkDropListEnterPredicate]="notLastDisplayedPredicate"
           (cdkDropListDropped)="dropInAvailable($event)">
         <li class="article-menu__item"
+            [ngClass]="{'article-menu__item--rtl': isLangRtl}"
             cdkDrag *ngFor="let item of availableMenuItems">{{item.title}}</li>
       </ul>
     </section>

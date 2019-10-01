@@ -52,6 +52,10 @@
   border-radius: 4px;
 }
 
+.article-menu__item--rtl.cdk-drag-preview {
+  text-align: right;
+}
+
 .article-menu__item.cdk-drag-placeholder {
   opacity: 0;
 }
