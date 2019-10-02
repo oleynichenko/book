@@ -6,12 +6,12 @@
   max-width: 320px;
 }
 
-.comment-menu__select ::ng-deep .mat-select-value {
+.comment-menu__select-bg ::ng-deep .mat-select-value {
   direction: ltr;
   text-align: left;
 }
 
-.comment-menu__select--rtl ::ng-deep .mat-select-value {
+.comment-menu__select-bg--rtl ::ng-deep .mat-select-value {
   direction: rtl;
   text-align: right;
 }

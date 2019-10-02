@@ -20,9 +20,10 @@
   }
 }
 
-@mixin sub-menu-typography($config) {
+@mixin article-menu-typography($config) {
   .article-menu__title {
     @include mat-typography-level-to-styles($config, subheading-2);
+    font-weight: 500;
   }
 
   .article-menu__item {

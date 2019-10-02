@@ -8,6 +8,7 @@
 @import '../app/book/sidenav-list/sidenav-list.theme';
 @import '../app/book/article/article.theme';
 @import '../app/book/article/article-menu/article-menu.theme';
+@import '../app/book/article/comment-menu/comment-menu.theme';
 @import '../app/book/article/article-content/article-content.theme';
 @import '../app/book/header/header.theme';
 @import './global.theme';
@@ -28,6 +29,8 @@
   @include global-typography($config);
   @include main-menu-typography($config);
   @include sub-menu-typography($config);
+  @include article-menu-typography($config);
+  @include comment-menu-typography($config);
   @include sidenav-list-typography($config);
   @include header-typography($config);
   @include article-typography($config);
