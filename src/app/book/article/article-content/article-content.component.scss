@@ -14,14 +14,6 @@
   width: 2px;
 }
 
-.article-content__chunk {
-  direction: ltr;
-}
-
-.article-content__chunk--rtl {
-  direction: rtl;
-}
-
 @media ($tablet-width) {
   .article-content__block {
     padding-left: 20px;

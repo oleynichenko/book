@@ -1,7 +1,6 @@
 @import '~@angular/material/theming';
 @import 'variables';
 
-
 @mixin global-theme($theme) {
   $primary: map-get($theme, primary);
 
@@ -30,31 +29,53 @@
   }
 }
 
-@mixin global-typography($config) {
-  .global-content p {
+@mixin loaded-typography($config, $config-he) {
+  .loaded-content p {
     @include mat-typography-level-to-styles($config, subheading-1);
     margin-top: 0;
     margin-bottom: 8px;
     text-align: justify;
+    direction: ltr;
   }
 
-  .global-content p strong {
+  .loaded-content--he p,
+  .loaded-content .loaded-content__p--he {
+    @include mat-typography-level-to-styles($config-he, subheading-1);
+    direction: rtl;
+  }
+
+  .loaded-content p strong {
     font-weight: 500;
   }
 
-  .global-content h1 {
+  .loaded-content h1 {
     @include mat-typography-level-to-styles($config, display-1);
     margin-top: 0;
+    direction: ltr;
+  }
+
+  .loaded-content--he h1 {
+    @include mat-typography-level-to-styles($config-he, display-1);
+    direction: rtl;
   }
 
   @media ($tablet-width) {
-    .global-content p {
+    .loaded-content p {
       @include mat-typography-level-to-styles($config, subheading-2);
       margin-bottom: 12px;
     }
 
-    .global-content h1 {
+    .loaded-content--he p,
+    .loaded-content .loaded-content__p--he {
+      @include mat-typography-level-to-styles($config-he, subheading-2);
+    }
+
+    .loaded-content h1 {
       @include mat-typography-level-to-styles($config, display-2);
+    }
+
+    .loaded-content--he h1 {
+      @include mat-typography-level-to-styles($config-he, display-2);
     }
   }
 }

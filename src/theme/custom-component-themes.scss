@@ -4,7 +4,6 @@
 @import '../app/book/footer/footer.theme';
 @import '../app/book/sub-menu/sub-menu.theme';
 @import '../app/book/main-menu/main-menu.theme';
-@import '../app/book/page/page.theme';
 @import '../app/book/sidenav-list/sidenav-list.theme';
 @import '../app/book/article/article.theme';
 @import '../app/book/article/article-menu/article-menu.theme';
@@ -12,6 +11,7 @@
 @import '../app/book/article/article-content/article-content.theme';
 @import '../app/book/header/header.theme';
 @import './global.theme';
+
 // you only have to add additional components here (instead of in every theme class)
 
 @mixin custom-components-theme($theme) {
@@ -26,7 +26,6 @@
 }
 
 @mixin custom-components-typography($config) {
-  @include global-typography($config);
   @include main-menu-typography($config);
   @include sub-menu-typography($config);
   @include article-menu-typography($config);

@@ -9,3 +9,19 @@
   }
 }
 
+@mixin article-menu-typography($config) {
+  .article-menu__title {
+    @include mat-typography-level-to-styles($config, subheading-2);
+    font-weight: 500;
+  }
+
+  .article-menu__item {
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+
+  @media ($tablet-width) {
+    .article-menu__title {
+      @include mat-typography-level-to-styles($config, title);
+    }
+  }
+}

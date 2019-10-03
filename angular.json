@@ -25,7 +25,8 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/fonts/roboto"
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",

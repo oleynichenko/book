@@ -1,4 +1,4 @@
-//@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "./theme/fonts.scss";
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -8,6 +8,7 @@
 
 // Be sure that you only ever include this mixin once!
 $config: mat-typography-config();
+$config-he: mat-typography-config($font-family: 'Rubik');
 
 @include mat-core($config);
 @include angular-material-theme($theme);
@@ -16,17 +17,32 @@ $config: mat-typography-config();
 @include custom-components-typography($config);
 
 /* You can add global styles to this file, and also import other style files */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
 
 .he-theme {
-  $config-he: mat-typography-config($font-family: 'Rubik');
-
   @include mat-list-typography($config-he);
   @include mat-button-typography($config-he);
   @include mat-menu-typography($config-he);
-
+  @include mat-tabs-typography($config-he);
 
   @include custom-components-typography($config-he);
 }
+
+@include loaded-typography($config, $config-he);
 
 @import './theme/simplebar.css';
 
@@ -38,3 +54,5 @@ html {
 .overflow-y {
   overflow-y: scroll;
 }
+
+
