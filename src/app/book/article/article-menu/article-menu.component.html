@@ -21,7 +21,7 @@
           (cdkDropListDropped)="dropInDisplayed($event)">
         <li class="article-menu__item"
             [ngClass]="{'article-menu__item--rtl': isLangRtl}"
-            cdkDrag *ngFor="let item of displayedMenuItems">{{item.title}}</li>
+            cdkDrag *ngFor="let item of displayedMenuItems">{{item.menuTitle}}</li>
       </ul>
     </section>
     <section class="article-menu__sect">
@@ -35,8 +35,11 @@
           (cdkDropListDropped)="dropInAvailable($event)">
         <li class="article-menu__item"
             [ngClass]="{'article-menu__item--rtl': isLangRtl}"
-            cdkDrag *ngFor="let item of availableMenuItems">{{item.title}}</li>
+            cdkDrag *ngFor="let item of availableMenuItems">{{item.menuTitle}}</li>
       </ul>
     </section>
+    <div class="article-menu__tip">
+      {{'DRAG_BETWEEN_COLUMNS' | translate}}
+    </div>
   </div>
 </ng-template>

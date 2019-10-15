@@ -69,6 +69,10 @@ export class CommentService {
         });
 
         this.setLangSelect(newLangSelect);
+
+        if (!this.langSelectValue) {
+          this.comment = this.translate.instant('CHOOSE_COMMENT');
+        }
       });
   }
 
@@ -76,14 +80,19 @@ export class CommentService {
     if (comment) {
       this.loadingStatus.next(true);
 
-      const url = this.apiUrl.getCommentUrl(comment.id, this.langSelectValue, comment.author, comment.article);
+      const url = this.apiUrl.getCommentUrl(
+        comment.commentId,
+        this.langSelectValue,
+        comment.authorId,
+        comment.articleId
+      );
 
       this.http.get(url).subscribe((data: any) => {
-        this.comment = data.content;
         this.loadingStatus.next(false);
+        this.comment = data.content || `<p>Comment is currently unavailable</p>`;
       });
     } else {
-      this.comment = null;
+      this.comment = this.translate.instant('CHOOSE_COMMENT');
     }
   }
 }

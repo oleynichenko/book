@@ -7,5 +7,7 @@
   "TEXT": "Text",
   "COMMENTS": "Comments",
   "AVAILABLE": "Available",
-  "TRANSLATIONS": "Translations"
+  "TRANSLATIONS": "Translations",
+  "DRAG_BETWEEN_COLUMNS": "*Drag menu items between columns",
+  "CHOOSE_COMMENT": "Choose comment's language and author"
 }

@@ -1,6 +1,6 @@
-<article class="loaded-content"
+<section class="loaded-content"
          [ngClass]="{'loaded-content--he': commentService.langSelect === 'he'}"
          [innerHTML]="commentService.comment">
-</article>
+</section>
 <app-loading *ngIf="isLoading$ | async"></app-loading>
 

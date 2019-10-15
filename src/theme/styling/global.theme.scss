@@ -32,6 +32,7 @@
 @mixin loaded-typography($config, $config-he) {
   .loaded-content p {
     @include mat-typography-level-to-styles($config, subheading-1);
+    line-height: 22px;
     margin-top: 0;
     margin-bottom: 8px;
     text-align: justify;
@@ -41,6 +42,7 @@
   .loaded-content--he p,
   .loaded-content .loaded-content__p--he {
     @include mat-typography-level-to-styles($config-he, subheading-1);
+    line-height: 22px;
     direction: rtl;
   }
 
@@ -62,12 +64,14 @@
   @media ($tablet-width) {
     .loaded-content p {
       @include mat-typography-level-to-styles($config, subheading-2);
+      line-height: 24px;
       margin-bottom: 12px;
     }
 
     .loaded-content--he p,
     .loaded-content .loaded-content__p--he {
       @include mat-typography-level-to-styles($config-he, subheading-2);
+      line-height: 24px;
     }
 
     .loaded-content h1 {

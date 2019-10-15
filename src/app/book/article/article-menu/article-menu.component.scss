@@ -2,11 +2,12 @@
 
 .article-menu__card {
   display: flex;
+  position: relative;
   width: calc(100vw - 56px);
   max-width: 500px;
 
   border-radius: 4px;
-  padding: 16px 12px 24px;
+  padding: 16px 12px 40px;
 }
 
 .article-menu__sect {
@@ -18,6 +19,13 @@
   padding: 0 8px;
   margin-top: 0;
   margin-bottom: 4px;
+}
+
+.article-menu__tip {
+  position: absolute;
+  bottom: 6px;
+  left: 20px;
+  right: 20px;
 }
 
 .article-menu__list {
@@ -37,7 +45,7 @@
 .article-menu__item {
   display: block;
   list-style: none;
-  padding: 8px;
+  padding: 8px 10px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   cursor: move;

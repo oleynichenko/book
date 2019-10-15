@@ -88,7 +88,7 @@ export class BookService {
       const sourcesByLang = sources[a.langId].authors;
 
       if (sourcesByLang.includes(a.authorId)) {
-        a.title = `${a.langName} - ${a.authorName}`;
+        a.menuTitle = `${a.langName} - ${a.authorName}`;
         return true;
       } else {
         return false;

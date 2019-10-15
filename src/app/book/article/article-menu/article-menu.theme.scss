@@ -26,6 +26,10 @@
     font-weight: 500;
   }
 
+  .article-menu__tip {
+    @include mat-typography-level-to-styles($config, caption);
+  }
+
   .article-menu__item {
     @include mat-typography-level-to-styles($config, body-1);
   }
