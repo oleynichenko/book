@@ -120,7 +120,7 @@ export class BookService {
   getSubdomainName() {
     return (isPlatformBrowser(this.platformId))
       ? this.document.location.hostname.split('.')[0]
-      : this.request.get('subdomains')[0];
+      : this.request.subdomains[0];
   }
 
   getBookLangs(bookId) {
