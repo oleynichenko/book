@@ -14,10 +14,13 @@ export class LangGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot) {
     const lang = route.params.lang;
+    const bookId = this.bookService.getSubdomainName();
 
-    return this.bookService.getBookLangs().pipe(
+    return this.bookService.getBookLangs(bookId).pipe(
       map((langs: any[]) => {
         if (langs.includes(lang)) {
+          this.bookService.bookId = bookId;
+
           return true;
         } else {
           const serverError = new ServerError(`We do not have translations on '${lang}' language`);
