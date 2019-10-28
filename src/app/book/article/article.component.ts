@@ -40,10 +40,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
     ).subscribe(([articleMenuData, commentMenuData]: any[]) => {
       if (articleMenuData && articleMenuData.length > 0) {
         this.articleMenuData = articleMenuData;
+
         // название статьи берем с меню
         this.articleTitle = this.getArticleTitle(this.translate.currentLang);
-        this.commentService.setCommentMenu(commentMenuData);
         this.hasComments = (commentMenuData && commentMenuData.length > 0);
+
+        if (this.hasComments) {
+          this.commentService.setCommentMenu(commentMenuData);
+        }
       } else {
         // поставить заглушку 404
         // возможно добавить блок с предложением об участии в переводах
@@ -100,7 +104,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       }
     }
 
-    return defaultArticleData.articleTitle;
+    return defaultArticleData.title;
   }
 
   private sortArticles(sources, data = []) {

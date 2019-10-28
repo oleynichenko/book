@@ -3,29 +3,21 @@
 .article-content__block {
   position: relative;
   padding-left: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .article-content__line {
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 0;
-  height: calc(100% - 11px);
+  height: calc(100% - 9px);
   width: 2px;
-}
-
-.article-content__chunk {
-  direction: ltr;
-}
-
-.article-content__chunk--rtl {
-  direction: rtl;
 }
 
 @media ($tablet-width) {
   .article-content__block {
     padding-left: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .article-content__line {

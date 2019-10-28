@@ -6,13 +6,11 @@ export const APP_BREAKPOINTS = new InjectionToken('APP_BREAKPOINTS');
 export const API_URL = new InjectionToken('API_URL');
 
 export interface IAppConfig {
-  book: string;
   defaultLang: string;
   breakPoints: object;
 }
 
 export const AppConfig: IAppConfig = {
-  book: 'foreword-zoar',
   defaultLang: 'en',
   breakPoints: {
     tablet: '(min-width: 720px)', // коммент рядом
@@ -21,26 +19,28 @@ export const AppConfig: IAppConfig = {
 };
 
 export const ApiUrl = {
-  bookLangs: `${environment.apiEndpoint}/books/${AppConfig.book}/langs`,
-
-  getBookData: (lang) => {
-    return `${environment.apiEndpoint}/books/${AppConfig.book}/${lang}`;
+  getBookLangsUrl: (book) => {
+    return `${environment.apiEndpoint}/books/${book}/langs`;
   },
 
-  getArticleUrl: (article, lang, author) => {
-    return `${environment.apiEndpoint}/articles/${article}/${author}/${lang}/${AppConfig.book}`;
+  getBookDataUrl: (lang, book) => {
+    return `${environment.apiEndpoint}/books/${book}/${lang}`;
   },
 
-  getArticleMenu: (article, lang) => {
-    return `${environment.apiEndpoint}/articles/menu/${article}/${lang}/${AppConfig.book}`;
+  getArticleUrl: (article, lang, author, book) => {
+    return `${environment.apiEndpoint}/articles/${article}/${author}/${lang}/${book}`;
   },
 
-  getCommentUrl: (comment, lang, author, article) => {
-    return `${environment.apiEndpoint}/comments/${comment}/${author}/${lang}/${AppConfig.book}/${article}`;
+  getArticleMenuUrl: (article, lang, book) => {
+    return `${environment.apiEndpoint}/articles/menu/${article}/${lang}/${book}`;
   },
 
-  getCommentMenu: (article, lang) => {
-    return `${environment.apiEndpoint}/comments/menu/${article}/${lang}/${AppConfig.book}`;
+  getCommentUrl: (comment, lang, author, article, book) => {
+    return `${environment.apiEndpoint}/comments/${comment}/${author}/${lang}/${book}/${article}`;
+  },
+
+  getCommentMenuUrl: (article, lang, book) => {
+    return `${environment.apiEndpoint}/comments/menu/${article}/${lang}/${book}`;
   },
 
   getLangsUrl: (lang, langs: string[]) => {
@@ -49,7 +49,7 @@ export const ApiUrl = {
     return `${environment.apiEndpoint}/langs/${lang}/${langsString}`;
   },
 
-  getPageUrl: (page, lang) => {
-    return `${environment.apiEndpoint}/pages/${page}/${lang}/${AppConfig.book}`;
+  getPageUrl: (page, lang, book) => {
+    return `${environment.apiEndpoint}/pages/${page}/${lang}/${book}`;
   }
 };

@@ -7,5 +7,7 @@
   "AUTHOR": "Автор",
   "TEXT": "Текст",
   "COMMENTS": "Комментарии",
-  "TRANSLATIONS": "Переводы"
+  "TRANSLATIONS": "Переводы",
+  "DRAG_BETWEEN_COLUMNS": "*Перетаскивайте пункты меню между колонками",
+  "CHOOSE_COMMENT": "Выберите язык и автора комментария"
 }

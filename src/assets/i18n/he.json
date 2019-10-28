@@ -9,5 +9,7 @@
   "TEXT": "טקסט",
   "COMMENTS": "הסברות",
   "LANGUAGE": "שפה",
-  "TRANSLATIONS": "תרגומים"
+  "TRANSLATIONS": "תרגומים",
+  "DRAG_BETWEEN_COLUMNS": "Drag menu items between columns*",
+  "CHOOSE_COMMENT": "Choose comment's language and author"
 }

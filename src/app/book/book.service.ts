@@ -1,4 +1,4 @@
-import {Inject, Injectable, PLATFORM_ID, Renderer2} from '@angular/core';
+import {Inject, Optional, Injector, Injectable, PLATFORM_ID, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {DOCUMENT, isPlatformBrowser} from '@angular/common';
@@ -10,23 +10,26 @@ import {Direction} from '@angular/cdk/bidi';
 import {MatSnackBar} from '@angular/material';
 
 import {API_URL, APP_CONFIG} from '../app.config';
+import {REQUEST} from '@nguniversal/express-engine/tokens';
 
 @Injectable()
 export class BookService {
   dir: Direction;
   loadingStatus = new BehaviorSubject<boolean>(false);
   renderer: Renderer2;
-
   bookData = new BehaviorSubject(null);
+  bookId: string;
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
               private router: Router,
               private breakpointObserver: BreakpointObserver,
               private snackBar: MatSnackBar,
+              private injector: Injector,
               @Inject(APP_CONFIG) private config,
               @Inject(API_URL) private apiUrl,
               @Inject(DOCUMENT) private document: Document,
+              @Optional() @Inject(REQUEST) private request: any,
               @Inject(PLATFORM_ID) private platformId: object) {}
 
   setDirection(lang) {
@@ -60,7 +63,7 @@ export class BookService {
       headers: {appInterfaceDisabled: 'true'}
     };
 
-    return this.http.get(this.apiUrl.getBookData(lang), options).pipe(
+    return this.http.get(this.apiUrl.getBookDataUrl(lang, this.bookId), options).pipe(
       tap((data: any) => {
         this.bookData.next(data);
       })
@@ -88,7 +91,7 @@ export class BookService {
       const sourcesByLang = sources[a.langId].authors;
 
       if (sourcesByLang.includes(a.authorId)) {
-        a.title = `${a.langName} - ${a.authorName}`;
+        a.menuTitle = `${a.langName} - ${a.authorName}`;
         return true;
       } else {
         return false;
@@ -97,7 +100,7 @@ export class BookService {
   }
 
   getArticleMenu(article, lang) {
-    const url = this.apiUrl.getArticleMenu(article, lang);
+    const url = this.apiUrl.getArticleMenuUrl(article, lang, this.bookId);
 
     return this.http.get(url).pipe(
       map(data => this.modifyArticleMenuData(data))
@@ -105,7 +108,7 @@ export class BookService {
   }
 
   getArticle(article, lang, author) {
-    const url = this.apiUrl.getArticleUrl(article, lang, author);
+    const url = this.apiUrl.getArticleUrl(article, lang, author, this.bookId);
 
     const options = {
       headers: {appInterfaceDisabled: 'true'}
@@ -114,16 +117,22 @@ export class BookService {
     return this.http.get(url, options);
   }
 
-  getBookLangs() {
+  getSubdomainName() {
+    return (isPlatformBrowser(this.platformId))
+      ? this.document.location.hostname.split('.')[0]
+      : this.request.subdomains[0];
+  }
+
+  getBookLangs(bookId) {
     const options = {
       headers: {appInterfaceDisabled: 'true'}
     };
 
-    return this.http.get(this.apiUrl.bookLangs, options);
+    return this.http.get(this.apiUrl.getBookLangsUrl(bookId), options);
   }
 
   getPage(page, lang) {
-    const url = this.apiUrl.getPageUrl(page, lang);
+    const url = this.apiUrl.getPageUrl(page, lang, this.bookId);
 
     const options = {
       headers: {appInterfaceDisabled: 'true'}

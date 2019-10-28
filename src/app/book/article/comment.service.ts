@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
 import {API_URL, APP_CONFIG} from '../../app.config';
 import {BehaviorSubject} from 'rxjs';
+import {BookService} from '../book.service';
 
 // компонент требует переработки
 @Injectable()
@@ -18,11 +19,12 @@ export class CommentService {
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
+              private bookService: BookService,
               @Inject(APP_CONFIG) private config,
               @Inject(API_URL) private apiUrl) { }
 
   getCommentMenu(article, lang) {
-    const url = this.apiUrl.getCommentMenu(article, lang);
+    const url = this.apiUrl.getCommentMenuUrl(article, lang, this.bookService.bookId);
 
     return this.http.get(url);
   }
@@ -61,7 +63,7 @@ export class CommentService {
   changeCommentMenuTranslation(lang) {
     const langs = this.langSelect.map((i) => i.langId);
 
-    this.http.get(this.apiUrl.getLangsUrl(lang, langs))
+    this.http.get(this.apiUrl.getLangsUrl(lang, langs, this.bookService))
       .subscribe((data: any) => {
         const newLangSelect = this.langSelect.map((i) => {
           i.name = data.find((j) => j.langId === i.langId).name;
@@ -69,6 +71,10 @@ export class CommentService {
         });
 
         this.setLangSelect(newLangSelect);
+
+        if (!this.langSelectValue) {
+          this.comment = this.translate.instant('CHOOSE_COMMENT');
+        }
       });
   }
 
@@ -76,14 +82,20 @@ export class CommentService {
     if (comment) {
       this.loadingStatus.next(true);
 
-      const url = this.apiUrl.getCommentUrl(comment.id, this.langSelectValue, comment.author, comment.article);
+      const url = this.apiUrl.getCommentUrl(
+        comment.commentId,
+        this.langSelectValue,
+        comment.authorId,
+        comment.articleId,
+        this.bookService.bookId
+      );
 
       this.http.get(url).subscribe((data: any) => {
-        this.comment = data.content;
         this.loadingStatus.next(false);
+        this.comment = data.content || `<p>Comment is currently unavailable</p>`;
       });
     } else {
-      this.comment = null;
+      this.comment = this.translate.instant('CHOOSE_COMMENT');
     }
   }
 }

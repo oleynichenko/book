@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 interface MenuItem {
   langId: string;
   authorId: string;
-  title: string;
+  menuTitle: string;
 }
 @Component({
   selector: 'app-article-menu',
@@ -106,7 +106,7 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
 
   private changeTitle(arr, data) {
     return arr.map((i) => {
-      i.title = data.find((j) => i.langId === j.langId && i.authorId === j.authorId).title;
+      i.menuTitle = data.find((j) => i.langId === j.langId && i.authorId === j.authorId).menuTitle;
 
       return i;
     });

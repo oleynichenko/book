@@ -1,4 +1,5 @@
-<article class="global-content"
+<article class="loaded-content"
          [dir]="bookService.dir"
+         [ngClass]="{'loaded-content--he': translate.currentLang === 'he'}"
          [innerHTML]="content$ | async">
 </article>
