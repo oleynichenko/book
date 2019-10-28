@@ -19,13 +19,9 @@ Tasks
 
 почему перегрузка при клике на home c error page?
 
-schema with subdomains: think of
-
 сделать невозможным перенос перевода в article если не было возварата данных с сервера (иначе неверное отображение в
 service worker) и тоже самое для comments selects
 
 Изменить настройки для разных url в service workers lka сокращения запросов к серверу.
 
-заглушка на выберите коммент
-
-надпись на меню article drag and drop
+не остается html от angular universal на страницах кроме главной
