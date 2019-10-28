@@ -1,16 +1,17 @@
 import {Inject, Optional, Injector, Injectable, PLATFORM_ID, Renderer2} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
-import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {Direction} from '@angular/cdk/bidi';
 import {MatSnackBar} from '@angular/material';
+import {HttpClient} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+import {REQUEST} from '@nguniversal/express-engine/tokens';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
+import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
 import {API_URL, APP_CONFIG} from '../app.config';
-import {REQUEST} from '@nguniversal/express-engine/tokens';
+import {Title} from '@angular/platform-browser';
 
 @Injectable()
 export class BookService {
@@ -30,7 +31,8 @@ export class BookService {
               @Inject(API_URL) private apiUrl,
               @Inject(DOCUMENT) private document: Document,
               @Optional() @Inject(REQUEST) private request: any,
-              @Inject(PLATFORM_ID) private platformId: object) {}
+              @Inject(PLATFORM_ID) private platformId: object,
+              private titleService: Title) {}
 
   setDirection(lang) {
     this.dir = (lang === 'he') ? 'rtl' : 'ltr';
@@ -47,10 +49,18 @@ export class BookService {
   changeTypography(lang) {
     if (isPlatformBrowser(this.platformId)) {
       if (lang === 'he') {
-        this.renderer.addClass(this.document.body, 'he-theme');
+        this.renderer.addClass(this.document.documentElement, 'he-theme');
       } else {
-        this.renderer.removeClass(this.document.body, 'he-theme');
+        this.renderer.removeClass(this.document.documentElement, 'he-theme');
       }
+    }
+  }
+
+  setBookTitle() {
+    if (isPlatformBrowser(this.platformId)) {
+      const title = `${this.bookData.getValue().title} - ${this.bookData.getValue().author} | ${this.translate.instant('JMBCL') }`;
+
+      this.titleService.setTitle(title);
     }
   }
 
