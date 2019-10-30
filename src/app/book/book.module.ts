@@ -19,6 +19,7 @@ import {MainMenuComponent} from './main-menu/main-menu.component';
 import {SubMenuComponent} from './sub-menu/sub-menu.component';
 import {FooterComponent} from './footer/footer.component';
 import {TranslateModule} from '@ngx-translate/core';
+import { LessonsComponent } from './article/lessons/lessons.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {TranslateModule} from '@ngx-translate/core';
     PageComponent,
     MainMenuComponent,
     FooterComponent,
-    SubMenuComponent
+    SubMenuComponent,
+    LessonsComponent
   ],
   imports: [
     CommonModule,

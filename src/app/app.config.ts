@@ -51,5 +51,9 @@ export const ApiUrl = {
 
   getPageUrl: (page, lang, book) => {
     return `${environment.apiEndpoint}/pages/${page}/${lang}/${book}`;
+  },
+
+  getLessonsUrl: (article, book) => {
+    return `${environment.apiEndpoint}/lessons/${article}/${book}`;
   }
 };

@@ -5,13 +5,13 @@ import {map, tap} from 'rxjs/operators';
 import {Direction} from '@angular/cdk/bidi';
 import {MatSnackBar} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
+import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 import {REQUEST} from '@nguniversal/express-engine/tokens';
 import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
 import {API_URL, APP_CONFIG} from '../app.config';
-import {Title} from '@angular/platform-browser';
 
 @Injectable()
 export class BookService {
@@ -160,5 +160,15 @@ export class BookService {
     );
 
     this.router.navigateByUrl(newLangUrl);
+  }
+
+  getArticleLessons(articleId) {
+    const url = this.apiUrl.getLessonsUrl(articleId, this.bookId);
+
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options);
   }
 }
