@@ -1,0 +1,20 @@
+@import 'mixins';
+@import 'variables';
+
+.lessons {
+  margin-top: 60px;
+  padding: 3px;
+}
+
+.lesson {
+  margin-bottom: 40px;
+}
+
+.lesson__sub-chunk {
+  margin-right: 4px;
+}
+@media ($tablet-width) {
+  .lessons {
+    margin-top: 65px;
+  }
+}
