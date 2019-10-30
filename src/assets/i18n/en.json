@@ -9,5 +9,9 @@
   "AVAILABLE": "Available",
   "TRANSLATIONS": "Translations",
   "DRAG_BETWEEN_COLUMNS": "*Drag menu items between columns",
-  "CHOOSE_COMMENT": "Choose comment's language and author"
+  "CHOOSE_COMMENT": "Choose comment's language and author",
+  "JMBCL": "Jewish multilingual books with comments ang lessons",
+  "LESSONS": "Lessons",
+  "TEACHER": "Teacher",
+  "DATE": "Date"
 }

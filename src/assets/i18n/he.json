@@ -11,5 +11,9 @@
   "LANGUAGE": "שפה",
   "TRANSLATIONS": "תרגומים",
   "DRAG_BETWEEN_COLUMNS": "Drag menu items between columns*",
-  "CHOOSE_COMMENT": "Choose comment's language and author"
+  "CHOOSE_COMMENT": "Choose comment's language and author",
+  "JMBCL": "Jewish multilingual books with comments ang lessons",
+  "LESSONS": "שיעורים",
+  "TEACHER": "מורה",
+  "DATE": "תאריך"
 }

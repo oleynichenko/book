@@ -3,9 +3,9 @@ import {MatSidenav} from '@angular/material';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 import {BookService} from './book.service';
-import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book',
@@ -31,11 +31,13 @@ export class BookComponent implements OnInit, OnDestroy {
     this.translate.setDefaultLang(lang);
     this.bookService.setDirection(lang);
     this.bookService.changeTypography(lang);
+    this.bookService.setBookTitle();
 
     this.trSubscription = this.translate.onLangChange.subscribe(
       (event: LangChangeEvent) => {
         this.bookService.setDirection(event.lang);
         this.bookService.changeTypography(event.lang);
+        this.bookService.setBookTitle();
       });
 
     this.isLoading$ = this.bookService.loadingStatus.pipe(

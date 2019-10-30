@@ -13,12 +13,14 @@ import {CommentService} from './comment.service';
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   articles = [];
+  lessons = [];
   articleTitle: string;
   articleMenuData;
   articleId: string;
   paramSubscription: Subscription;
   trSubscription: Subscription;
   hasComments: boolean;
+  hasLessons: boolean;
 
   constructor(private bookService: BookService,
               private commentService: CommentService,
@@ -34,20 +36,26 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
         return forkJoin([
           this.bookService.getArticleMenu(this.articleId, lang),
-          this.commentService.getCommentMenu(this.articleId, lang)
+          this.commentService.getCommentMenu(this.articleId, lang),
+          this.bookService.getArticleLessons(this.articleId)
         ]);
       })
-    ).subscribe(([articleMenuData, commentMenuData]: any[]) => {
+    ).subscribe(([articleMenuData, commentMenuData, lessonsData]: any[]) => {
       if (articleMenuData && articleMenuData.length > 0) {
         this.articleMenuData = articleMenuData;
 
         // название статьи берем с меню
         this.articleTitle = this.getArticleTitle(this.translate.currentLang);
+
         this.hasComments = (commentMenuData && commentMenuData.length > 0);
 
         if (this.hasComments) {
           this.commentService.setCommentMenu(commentMenuData);
         }
+
+        this.hasLessons = (lessonsData && lessonsData.length > 0);
+
+        this.lessons = this.hasLessons ? lessonsData : [];
       } else {
         // поставить заглушку 404
         // возможно добавить блок с предложением об участии в переводах

@@ -17,5 +17,9 @@
         class="article__panel article__panel--mt"></app-comment-menu>
       <app-comment></app-comment>
     </mat-tab>
+    <mat-tab label="{{'LESSONS' | translate}}"
+             *ngIf="hasLessons">
+      <app-lessons [lessons]="lessons"></app-lessons>
+    </mat-tab>
   </mat-tab-group>
 </article>

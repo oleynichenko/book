@@ -1,9 +1,9 @@
 {
   "name": "start-book",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open=true",
+    "start": "ng serve --disable-host-check",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -71,4 +71,3 @@
     "webpack-cli": "3.3.6"
   }
 }
-
