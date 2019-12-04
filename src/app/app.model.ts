@@ -18,7 +18,8 @@ export class ServerError {
 export const RoutesNames = {
   ERROR: 'error',
   ABOUT: 'about',
-  ARTICLE: 'article'
+  ARTICLE: 'article',
+  AUTHORS: 'authors'
 };
 
 export class ErrorData {

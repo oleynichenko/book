@@ -1,0 +1,42 @@
+<article class="authors">
+  <section
+    class="loaded-content"
+    [dir]="bookService.dir"
+    [ngClass]="{'loaded-content--he': translate.currentLang === 'he'}"
+    [innerHTML]="content$ | async">
+  </section>
+  <section>
+    <mat-card *ngFor="let author of authors$ | async"
+              class="author mat-elevation-z2">
+      <div class="author__img"
+           *ngIf="author.img"
+           [ngClass]="{'author__img--he': translate.currentLang === 'he'}">
+        <img [src]="author.img"
+             [alt]="author.name">
+      </div>
+      <div class="author__content">
+        <mat-card-title>{{author.name}}</mat-card-title>
+        <mat-card-subtitle>{{author.country}}</mat-card-subtitle>
+        <mat-card-content
+          class="author-description loaded-content"
+          [ngClass]="{'loaded-content--he': translate.currentLang === 'he'}"
+          width="100%"
+          [innerHTML]="author.description">
+        </mat-card-content>
+        <ul *ngIf="author.contacts.length > 0"
+            class="author_contacts">
+          <li class="author_contact"
+              *ngFor="let contact of author.contacts">
+            <a class="author__link"
+               target="_blank"
+               href="{{contact.link}}">
+              <svg class="author__icon">
+                <use attr.xlink:href="assets/symbol-defs.svg#{{contact.icon}}"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </mat-card>
+  </section>
+</article>

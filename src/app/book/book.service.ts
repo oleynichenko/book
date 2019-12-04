@@ -153,6 +153,16 @@ export class BookService {
     );
   }
 
+  getAuthors(lang) {
+    const url = this.apiUrl.getAuthorsUrl(lang, this.bookId);
+
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options);
+  }
+
   navigateByLangUrl(langId) {
     const newLangUrl = this.router.url.replace(
       `/${this.translate.currentLang}`,

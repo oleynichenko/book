@@ -1,0 +1,95 @@
+@import "variables";
+
+:host {
+  display: block;
+  max-width: $max-content-width;
+  margin: 0 auto;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  max-width: $max-vert-card-height;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+}
+
+ // ставить фото не менее 283px в ширину
+.author__img {
+  max-height: 440px; // поск максим ширина фото 352 (4*5)
+
+  margin-bottom: 24px;
+
+  border-style: solid;
+  border-width: 1px;
+
+  overflow: hidden;
+}
+
+.author__img img {
+  display: block;
+  height: auto;
+
+  max-width: 100%;
+}
+
+
+.author__content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+.author_contacts {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
+}
+
+.author_contact {
+  margin-right: 12px;
+}
+
+.author__link {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.author__icon {
+  width: 100%;
+  height: 100%;
+}
+
+@media ($tablet-width) {
+  .author {
+    flex-direction: row;
+    max-width: none;
+  }
+
+  .author__img {
+    flex-shrink: 0;
+
+    max-height: 306px; // поск максим ширина фото 245 (4*5)
+    width: 35%;
+
+    margin-right: 16px;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .author__img--he {
+    margin-left: 16px;
+    margin-right: 0;
+  }
+
+  .author-description {
+    max-height: 188px;
+    overflow: hidden;
+  }
+}
