@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+@import 'variables';
+
+@mixin authors-menu-theme($theme) {
+  $foreground: map-get($theme, foreground);
+
+  .author__img {
+    border-color: mat-color($foreground, divider);
+  }
+
+  .author__icon {
+    fill: mat-color($foreground, icons);
+  }
+}
+
+@mixin authors-typography($config) {
+
+  @media ($tablet-width) {
+  }
+}

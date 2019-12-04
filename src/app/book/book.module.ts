@@ -20,6 +20,7 @@ import {SubMenuComponent} from './sub-menu/sub-menu.component';
 import {FooterComponent} from './footer/footer.component';
 import {TranslateModule} from '@ngx-translate/core';
 import { LessonsComponent } from './article/lessons/lessons.component';
+import { AuthorsComponent } from './authors/authors.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { LessonsComponent } from './article/lessons/lessons.component';
     MainMenuComponent,
     FooterComponent,
     SubMenuComponent,
-    LessonsComponent
+    LessonsComponent,
+    AuthorsComponent
   ],
   imports: [
     CommonModule,

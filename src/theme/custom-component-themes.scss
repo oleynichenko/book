@@ -4,6 +4,7 @@
 @import '../app/book/footer/footer.theme';
 @import '../app/book/sub-menu/sub-menu.theme';
 @import '../app/book/main-menu/main-menu.theme';
+@import '../app/book/authors/authors.theme';
 @import '../app/book/sidenav-list/sidenav-list.theme';
 @import '../app/book/article/article.theme';
 @import '../app/book/article/article-menu/article-menu.theme';
@@ -16,6 +17,7 @@
 
 @mixin custom-components-theme($theme) {
   @include global-theme($theme);
+  @include loaded-theme($theme);
   @include footer-theme($theme);
   @include sub-menu-theme($theme);
   @include article-menu-theme($theme);
@@ -23,6 +25,7 @@
   @include sidenav-list-theme($theme);
   @include sidenav-list-theme($theme);
   @include article-content-theme($theme);
+  @include authors-menu-theme($theme);
 }
 
 @mixin custom-components-typography($config) {
@@ -33,5 +36,6 @@
   @include sidenav-list-typography($config);
   @include header-typography($config);
   @include article-typography($config);
+  @include authors-typography($config);
 }
 

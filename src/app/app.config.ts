@@ -53,7 +53,15 @@ export const ApiUrl = {
     return `${environment.apiEndpoint}/pages/${page}/${lang}/${book}`;
   },
 
+  getAuthorsUrl: (lang, book) => {
+    return `${environment.apiEndpoint}/authors/${lang}/${book}`;
+  },
+
   getLessonsUrl: (article, book) => {
     return `${environment.apiEndpoint}/lessons/${article}/${book}`;
+  },
+
+  getImgStoreUrl: (img) => {
+    return `${environment.apiEndpoint}/img/${img}`;
   }
 };

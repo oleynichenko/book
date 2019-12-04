@@ -10,6 +10,8 @@ import {LangGuardService} from './lang-guard.service';
 import {RoutesNames} from './app.model';
 import {ErrorComponent} from './error/error.component';
 import {BookComponent} from './book/book.component';
+import {AuthorsComponent} from './book/authors/authors.component';
+import {AuthorsResolver} from './book/authors/authors.resolver';
 
 const routes: Routes = [
   {path: '', redirectTo: `${AppConfig.defaultLang}`, pathMatch: 'full'},
@@ -20,8 +22,18 @@ const routes: Routes = [
     canActivate: [LangGuardService],
     resolve: {library: BookResolver},
     children: [
-      {path: '', redirectTo: `${RoutesNames.ABOUT}`, pathMatch: 'full'},
-      {path: `${RoutesNames.ARTICLE}/:id`, component: ArticleComponent},
+      {
+        path: '',
+        redirectTo: `${RoutesNames.ABOUT}`,
+        pathMatch: 'full'
+      },
+      {path: `${RoutesNames.ARTICLE}/:id`,
+        component: ArticleComponent
+      },
+      {path: `${RoutesNames.AUTHORS}`,
+        resolve: {content: AuthorsResolver},
+        component: AuthorsComponent
+      },
       {path: ':page',
         resolve: {content: PageResolver},
         component: PageComponent
@@ -37,7 +49,8 @@ const routes: Routes = [
   providers: [
     LangGuardService,
     BookResolver,
-    PageResolver
+    PageResolver,
+    AuthorsResolver
   ],
   exports: [
     RouterModule

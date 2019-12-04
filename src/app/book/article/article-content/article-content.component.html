@@ -4,7 +4,8 @@
     <div [ngClass]="{'article-content__block': item.length > 1}">
       <div class="article-content__line" *ngIf="item.length > 1"></div>
       <p [ngClass]="{'loaded-content__p--he': chunk.langId === 'he'}"
-         *ngFor="let chunk of item">{{chunk.content}}</p>
+         *ngFor="let chunk of item"
+         [innerHTML]="chunk.content"></p>
     </div>
   </ng-container>
 </section>
