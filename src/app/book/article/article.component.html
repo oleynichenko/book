@@ -9,7 +9,7 @@
         [menuData]="articleMenuData"
         [articleId]="articleId">
       </app-article-menu>
-      <app-article-content [articles]="articles"></app-article-content>
+      <app-article-content [articleContent]="articles"></app-article-content>
     </mat-tab>
     <mat-tab label="{{'COMMENTS' | translate}}"
              *ngIf="hasComments">
