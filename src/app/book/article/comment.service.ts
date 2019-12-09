@@ -48,9 +48,9 @@ export class CommentService {
       }).comments;
 
       this.commentsSelect = comments.map((c: any) => {
-        c.title = (c.title)
-          ? `${c.title} - ${c.authorName}`
-          : c.authorName;
+        c.title = (c.translatorName)
+          ? `${c.title} - ${c.translatorName}`
+          : c.title;
 
         return c;
       });
@@ -87,7 +87,8 @@ export class CommentService {
         this.langSelectValue,
         comment.authorId,
         comment.articleId,
-        this.bookService.bookId
+        this.bookService.bookId,
+        comment.translatorId
       );
 
       this.http.get(url).subscribe((data: any) => {

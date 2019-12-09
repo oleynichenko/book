@@ -51,8 +51,12 @@ export const ApiUrl = {
     return `${environment.apiEndpoint}/articles/menu/${article}/${lang}/${book}`;
   },
 
-  getCommentUrl: (comment, lang, author, article, book) => {
-    return `${environment.apiEndpoint}/comments/${comment}/${author}/${lang}/${book}/${article}`;
+  getCommentUrl: (comment, lang, author, article, book, translator?) => {
+    const queryParams = translator
+      ? `/?translatorId=${translator}`
+      : '';
+
+    return `${environment.apiEndpoint}/comments/${comment}/${author}/${lang}/${book}/${article}${queryParams}`;
   },
 
   getCommentMenuUrl: (article, lang, book) => {
