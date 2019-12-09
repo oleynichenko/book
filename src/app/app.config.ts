@@ -8,6 +8,8 @@ export const API_URL = new InjectionToken('API_URL');
 export interface IAppConfig {
   defaultLang: string;
   breakPoints: object;
+  needTranslationText: string;
+  needInfoText: string;
 }
 
 export const AppConfig: IAppConfig = {
@@ -15,7 +17,21 @@ export const AppConfig: IAppConfig = {
   breakPoints: {
     tablet: '(min-width: 720px)', // коммент рядом
     desktop: '(min-width: 1280px)' // главное меню рядом с названием книги
-  }
+  },
+  needTranslationText: `<p>Please,
+    <a
+      class="global-link--primary"
+      target="_blank"
+      href="mailto:kurtal1976@gmail.com?subject=Help with translation"
+    >help us</a> translate this page from russian
+  </p>`,
+  needInfoText: `<p>Please,
+    <a
+      class="global-link--primary"
+      target="_blank"
+      href="mailto:kurtal1976@gmail.com?subject=Help with translation"
+    >help us</a> find this information
+  </p>`
 };
 
 export const ApiUrl = {
