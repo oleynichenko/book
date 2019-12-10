@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
 import {BookService} from '../book.service';
-import {API_URL} from '../../app.config';
+import {API_URL, APP_CONFIG} from '../../app.config';
 
 @Component({
   selector: 'app-authors',
@@ -19,7 +19,8 @@ export class AuthorsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               public translate: TranslateService,
               public bookService: BookService,
-              @Inject(API_URL) private apiUrl) { }
+              @Inject(API_URL) private apiUrl,
+              @Inject(APP_CONFIG) private config) { }
 
   ngOnInit() {
     this.content$ = this.route.data.pipe(
@@ -33,6 +34,10 @@ export class AuthorsComponent implements OnInit {
         return authors.map((a) => {
           if (a.img) {
             a.img = this.apiUrl.getImgStoreUrl(a.img);
+          }
+
+          if (a.description === '') {
+            a.description = this.config.needInfoText;
           }
 
           return a;

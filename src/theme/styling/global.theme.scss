@@ -31,6 +31,7 @@
 
 @mixin loaded-theme($theme) {
   $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
 
   .loaded-content a {
     color: mat-color($primary);
@@ -44,9 +45,12 @@
     }
   }
 
-
   .loaded-content .loaded-content__footnote--chosen::after {
     background-color:rgba(mat-color($accent), 0.3);;
+  }
+
+  .loaded-content img {
+    border-color: mat-color($foreground, divider);
   }
 }
 
@@ -137,6 +141,17 @@
     top: -4.5px;
   }
 
+  .loaded-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+
+    margin: 0 auto 24px;
+
+    border-style: solid;
+    border-width: 1px;
+  }
+
   @media ($tablet-width) {
     .loaded-content p {
       @include mat-typography-level-to-styles($config, subheading-2);
@@ -176,6 +191,27 @@
 
     .loaded-content .loaded-content__footnote--chosen::after {
       top: -3.5px;
+    }
+
+    .loaded-content img {
+      max-width: 245px;
+      height: auto;
+    }
+
+    .loaded-content img[data-img=right],
+    .loaded-content--he img[data-img=left] {
+      float: right;
+
+      margin-left: 24px;
+      margin-right: 0;
+    }
+
+    .loaded-content img[data-img=left],
+    .loaded-content--he img[data-img=right] {
+      float: left;
+
+      margin-left: 0;
+      margin-right: 24px;
     }
   }
 }
