@@ -1,10 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
-import {TranslateService} from '@ngx-translate/core';
-import {API_URL, APP_CONFIG} from '../../app.config';
 import {BehaviorSubject} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
+
+import {API_URL, APP_CONFIG} from '../../app.config';
 import {BookService} from '../book.service';
+import {Footnote} from '../../app.model';
+import {FootnoteService} from '../../shared/footnote.service';
 
 // компонент требует переработки
 @Injectable()
@@ -16,6 +18,8 @@ export class CommentService {
   commentsSelect: any;
   commentsSelectValue: string;
   comment: string;
+  footnotes: {};
+  footnotesToSet = false;
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
@@ -48,7 +52,7 @@ export class CommentService {
       }).comments;
 
       this.commentsSelect = comments.map((c: any) => {
-        c.title = (c.translatorName)
+        c.title = c.translatorName
           ? `${c.title} - ${c.translatorName}`
           : c.title;
 
@@ -93,10 +97,34 @@ export class CommentService {
 
       this.http.get(url).subscribe((data: any) => {
         this.loadingStatus.next(false);
-        this.comment = data.content || `<p>Comment is currently unavailable</p>`;
+
+        if (data.content !== '') {
+          if (data.footnotes) {
+            this.footnotes = this.getFootnotes(data.footnotes, data.langId);
+            this.comment = FootnoteService.pasteFootnotes(data.content, data.langId);
+            this.footnotesToSet = true;
+          } else {
+            this.footnotes = null;
+            this.comment = data.content;
+          }
+        } else {
+          this.footnotes = null;
+          this.comment = `<p>Comment is currently unavailable</p>`;
+        }
       });
     } else {
+      this.footnotes = null;
       this.comment = this.translate.instant('CHOOSE_COMMENT');
     }
+  }
+
+  getFootnotes(footnotesData: Footnote[], lang) {
+    const res = {};
+
+    footnotesData.forEach((f) => {
+      res[FootnoteService.getFootnoteName(f.id, lang)] = f.text;
+    });
+
+    return res;
   }
 }

@@ -1,23 +1,20 @@
 import {
   AfterViewChecked,
-  AfterViewInit,
   Component,
   ElementRef,
   Input,
   OnChanges, OnDestroy,
-  OnInit,
-  QueryList, Renderer2,
-  ViewChild,
-  ViewChildren
+  OnInit, Renderer2,
 } from '@angular/core';
+
 import {Article, Chunk} from '../../../app.model';
-import {MatSnackBar} from '@angular/material';
-import {first} from 'rxjs/operators';
+import {FootnoteService} from '../../../shared/footnote.service';
 
 @Component({
   selector: 'app-article-content',
   templateUrl: './article-content.component.html',
-  styleUrls: ['./article-content.component.scss']
+  styleUrls: ['./article-content.component.scss'],
+  providers: [FootnoteService]
 })
 export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() set articleContent(data: Article[]) {
@@ -32,7 +29,7 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
         const chunkData = [{
           chunkId: c.chunkId,
           content: (firstArticle.footnotes && firstArticle.footnotes.length)
-            ? this._pasteFootnotes(c.content, firstArticle.langId)
+            ? FootnoteService.pasteFootnotes(c.content, firstArticle.langId)
             : c.content,
           langId: firstArticle.langId,
         }];
@@ -43,7 +40,7 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
 
           const chunkContent = chunk
             ? (article.footnotes && article.footnotes.length)
-              ? this._pasteFootnotes(chunk.content, article.langId)
+              ? FootnoteService.pasteFootnotes(chunk.content, article.langId)
               : chunk.content
             : '';
 
@@ -61,71 +58,30 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
 
   content: Chunk[][];
   private footnotes: {};
-  private footnotesElems: NodeList;
   private contentChanged: boolean;
 
   constructor(private hostElementRef: ElementRef,
               private renderer: Renderer2,
-              private snackBar: MatSnackBar) { }
+              public footnoteService: FootnoteService) {
+    footnoteService.renderer = renderer;
+  }
 
   ngOnInit() {}
 
   ngOnChanges(changes) {
     if (changes.articleContent && changes.articleContent.currentValue.length) {
       this.contentChanged = true;
-      this.snackBar.dismiss();
+      this.footnoteService.closeFootnote();
     }
   }
 
   ngAfterViewChecked() {
     if (this.contentChanged) {
-      this.footnotesElems = this.getFootnotesElems();
-      this.setListenersToFootnotes(this.footnotesElems);
+      this.footnoteService.setListenersToFootnotes(
+        this.hostElementRef.nativeElement,
+        this.footnotes);
+
       this.contentChanged = false;
-    }
-  }
-
-  private getFootnotesElems() {
-    return this.hostElementRef.nativeElement
-      .querySelectorAll('.loaded-content__footnote');
-  }
-
-  private setListenersToFootnotes(elems: NodeList) {
-    elems.forEach((f) => {
-      if (f.isConnected) {
-        this.renderer.listen(
-          f,
-          'click',
-          this.onFootnoteClick.bind(this)
-        );
-      }
-    });
-  }
-
-  private onFootnoteClick(event) {
-    if (!event.target.classList.contains('loaded-content__footnote--chosen')) {
-      const data = event.target.dataset;
-
-      const footnoteText = this.footnotes[data.footnote]
-        || 'Sorry, this footnote is not set yet...';
-
-      const direction = (data.lang === 'he') ? 'rtl' : 'ltr';
-
-      const snackBarRef = this.snackBar.open(footnoteText, 'X', {direction});
-
-      this.renderer.addClass(
-        event.target,
-        'loaded-content__footnote--chosen'
-      );
-
-      snackBarRef.afterDismissed()
-        .pipe(first())
-        .subscribe(info => {
-          this.renderer.removeClass(
-            event.target,
-            'loaded-content__footnote--chosen'
-          );
-      });
     }
   }
 
@@ -133,26 +89,11 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
     return chunks.find((i) => i.chunkId === id);
   }
 
-  private _pasteFootnotes(content: string, lang: string): string {
-    const regExp = /\[\d{1,}\]/g; // поиск [число]
-
-    return content.replace(regExp, (match) => {
-      const footnoteId = match.substring(1, match.length - 1);
-      const footnoteName = this._getFootnoteName(footnoteId, lang);
-
-      return `<a class="loaded-content__footnote" data-footnote="${footnoteName}" data-lang="${lang}"></a>`;
-    });
-  }
-
-  private _getFootnoteName(id, lang) {
-    return `${lang}_${id}`;
-  }
-
   private _getAllFootnotes(data: Article[]) {
     return data.reduce((res, a) => {
       if (a.footnotes) {
         a.footnotes.forEach((f) => {
-          res[this._getFootnoteName(f.id, a.langId)] = f.text;
+          res[FootnoteService.getFootnoteName(f.id, a.langId)] = f.text;
         });
       }
 
@@ -161,6 +102,7 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
   }
 
   ngOnDestroy() {
-    this.snackBar.dismiss();
+    // убирает также и сноски в комментах
+    this.footnoteService.closeFootnote();
   }
 }
