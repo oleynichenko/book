@@ -101,7 +101,11 @@ export class BookService {
       const sourcesByLang = sources[a.langId].authors;
 
       if (sourcesByLang.includes(a.authorId)) {
-        a.menuTitle = `${a.langName} - ${a.authorName}`;
+        const authorString = a.authorId !== this.bookData.getValue().authorId
+          ? `${this.translate.instant('TRANSL')} ${a.authorName}`
+          : this.translate.instant('ORIGINAL');
+
+        a.menuTitle = `${a.langName} - ${authorString}`;
         return true;
       } else {
         return false;
@@ -151,6 +155,16 @@ export class BookService {
     return this.http.get(url, options).pipe(
       map((data: any) => data.content)
     );
+  }
+
+  getAuthors(lang) {
+    const url = this.apiUrl.getAuthorsUrl(lang, this.bookId);
+
+    const options = {
+      headers: {appInterfaceDisabled: 'true'}
+    };
+
+    return this.http.get(url, options);
   }
 
   navigateByLangUrl(langId) {

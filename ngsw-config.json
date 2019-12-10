@@ -28,7 +28,7 @@
     {
       "name": "api",
       "urls": [
-        "https://book-srv.herokuapp.com/**"
+        "https://jbook-srv.herokuapp.com/**"
       ],
       "cacheConfig": {
         "maxSize": 100,

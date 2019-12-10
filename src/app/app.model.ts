@@ -8,6 +8,26 @@ export interface Lesson {
   authorNames: object;
   date?: Date;
 }
+export interface Footnote {
+  id: string;
+  text: string;
+}
+
+export interface Chunk {
+  chunkId: string;
+  content: string;
+  langId: string;
+}
+
+export interface Article {
+  articleId: string;
+  authorId: string;
+  bookId: string;
+  chunks: Chunk[];
+  langId: string;
+  title: string;
+  footnotes: Footnote[];
+}
 
 export type Langs = string[];
 
@@ -18,7 +38,8 @@ export class ServerError {
 export const RoutesNames = {
   ERROR: 'error',
   ABOUT: 'about',
-  ARTICLE: 'article'
+  ARTICLE: 'article',
+  AUTHORS: 'authors'
 };
 
 export class ErrorData {

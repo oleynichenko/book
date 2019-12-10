@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {BookService} from '../book.service';
 import {TranslateService} from '@ngx-translate/core';
+import {APP_CONFIG} from '../../app.config';
 
 @Component({
   selector: 'app-page',
@@ -15,11 +16,14 @@ export class PageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               public translate: TranslateService,
-              public bookService: BookService) { }
+              public bookService: BookService,
+              @Inject(APP_CONFIG) private config) { }
 
   ngOnInit() {
     this.content$ = this.route.data.pipe(
-      map((data: any) => data.content)
+      map((data: any) => data.content !== ''
+        ? data.content
+        : this.config.needTranslationText)
     );
   }
 }

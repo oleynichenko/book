@@ -1,6 +1,8 @@
 libraryResolver works on PageComponent
 
-Instruction
+Instructions
+
+*Start project
 1. Create angular project + fix versions
 2. Git init + load on github "initial"
 3. Install project dependencies
@@ -11,6 +13,10 @@ Instruction
 - transfer folder theme
 - add components checking custom-components-theme
 
+*Run http server for teting service worker:
+http-server 0.0.9
+got to folder with index.html
+http-sever -p 4200
 
 Tasks
 сделать для PagеComponent отдельный loading компонент иначе есть разрыв в загрузке с запросом на книгу при смене языка.
@@ -24,6 +30,5 @@ service worker) и тоже самое для comments selects
 
 Изменить настройки для разных url в service workers lka сокращения запросов к серверу.
 
-не остается html от angular universal на страницах кроме главной
-
 сделать возможность работы с сервером на стенде
+

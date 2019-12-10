@@ -1,5 +1,5 @@
 <article class="loaded-content"
          [dir]="bookService.dir"
          [ngClass]="{'loaded-content--he': translate.currentLang === 'he'}"
-         [innerHTML]="content$ | async">
+         [innerHTML]="content$ | async | safeHtml">
 </article>
