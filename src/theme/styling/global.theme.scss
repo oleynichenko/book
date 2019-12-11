@@ -63,7 +63,7 @@
     @include mat-typography-level-to-styles($config, subheading-1);
     line-height: 22px;
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     text-align: justify;
     direction: ltr;
   }
@@ -152,7 +152,6 @@
     .loaded-content p {
       @include mat-typography-level-to-styles($config, subheading-2);
       line-height: 24px;
-      margin-bottom: 12px;
     }
 
     .loaded-content--he p,
