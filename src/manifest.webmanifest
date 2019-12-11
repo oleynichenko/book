@@ -1,7 +1,7 @@
 {
-  "name": "start-book",
-  "short_name": "start-book",
-  "theme_color": "#1976d2",
+  "name": "JBOOK.club",
+  "short_name": "JBOOK",
+  "theme_color": "#673ab7",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
