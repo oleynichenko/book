@@ -3,21 +3,21 @@
 .article-content__block {
   position: relative;
   padding-left: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .article-content__line {
   position: absolute;
-  top: 5px;
+  top: 3px;
   left: 0;
-  height: calc(100% - 9px);
+  height: calc(100% - 5px);
   width: 2px;
 }
 
 @media ($tablet-width) {
   .article-content__block {
     padding-left: 20px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .article-content__line {

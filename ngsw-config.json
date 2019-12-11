@@ -28,12 +28,12 @@
     {
       "name": "api",
       "urls": [
-        "https://jbook-srv.herokuapp.com/**"
+        "https://jbook-srv.herokuapp.com/**",
+        "https://jbook-srv.herokuapp.com/img/*.jpg"
       ],
       "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "6h",
-        "timeout": "2s",
+        "maxSize": 200,
+        "maxAge": "365d",
         "strategy": "performance"
       }
     }
