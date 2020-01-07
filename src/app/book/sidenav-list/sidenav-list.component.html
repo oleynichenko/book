@@ -1,4 +1,6 @@
-<mat-nav-list class="nav">
+<mat-nav-list
+  class="nav"
+  [ngClass]="{'sidenav-list--he': translate.currentLang === 'he'}">
   <ng-container *ngFor="let item of sideMenu$ | async">
     <a mat-list-item
        class="nav__item"
