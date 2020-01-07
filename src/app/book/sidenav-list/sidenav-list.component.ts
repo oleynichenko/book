@@ -3,6 +3,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 import {BookService} from '../book.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -14,7 +15,8 @@ export class SidenavListComponent implements OnInit {
 
   sideMenu$: Observable<any>;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService,
+              public translate: TranslateService,) { }
 
   ngOnInit() {
     this.sideMenu$ = this.bookService.bookData

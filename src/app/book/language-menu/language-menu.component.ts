@@ -1,7 +1,7 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {LanguageMenuService} from './language-menu.service';
 
