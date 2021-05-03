@@ -33,4 +33,6 @@ service worker) и тоже самое для comments selects
 сделать возможность работы с сервером на стенде
 
 сделать в lang-menu вместо иконки названия языков
+добавить в sidebar padding-bottom
+
 
