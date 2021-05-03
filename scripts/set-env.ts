@@ -56,4 +56,8 @@ const environmentFileContent = `
 
 writeFileUsingFS(targetPath, environmentFileContent); // appending data into the target file
 
+if (isProduction) {
+  writeFileUsingFS('./src/environments/environment.ts', environmentFileContent); // main.server.js falls down while build:ssr runs
+}
+
 /* tslint:enable */
