@@ -11,7 +11,6 @@
 
 @mixin main-menu-typography($config) {
   .mainmenu__link {
-    //@include mat-button-typography($main-menu-btn-config);
     font-size: mat-font-size($config, subheading-2);
   }
 }

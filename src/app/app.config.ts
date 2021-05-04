@@ -22,14 +22,14 @@ export const AppConfig: IAppConfig = {
     <a
       class="global-link--primary"
       target="_blank"
-      href="mailto:kurtal1976@gmail.com?subject=Help with translation"
+      href="mailto:admin@jbook.online?subject=Help with translation"
     >help us</a> translate this page from russian
   </p>`,
   needInfoText: `<p>Please,
     <a
       class="global-link--primary"
       target="_blank"
-      href="mailto:kurtal1976@gmail.com?subject=Help with translation"
+      href="mailto:admin@jbook.online?subject=Help with translation"
     >help us</a> find this information
   </p>`
 };

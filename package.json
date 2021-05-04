@@ -4,9 +4,8 @@
   "scripts": {
     "ng": "ng",
     "config": "ts-node ./scripts/set-env.ts",
-    "dev": "ng serve --disable-host-check --port=4202",
     "start": "npm run config -- --environment=dev && ng serve --disable-host-check --port=4202",
-    "build": "npm run config -- --environment=prod && ng build --prod",
+    "build": "npm run build:ssr",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -14,8 +13,7 @@
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "npm run config -- --environment=prod && ng build --prod && ng run start-book:server:production --bundleDependencies all",
-    "start:heroku": "node dist/server",
-    "postinstall": "npm run build:ssr"
+    "start:heroku": "node dist/server"
   },
   "engines": {
     "node": "12.3.1",
