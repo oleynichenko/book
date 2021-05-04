@@ -118,11 +118,11 @@
   .loaded-content .loaded-content__footnote {
     position: relative;
     display: inline-block;
-    width: 8px;
+    width: 10px;
 
     cursor: pointer;
   }
-  
+
   .loaded-content .loaded-content__footnote::after {
     counter-increment: footnote 1;
     content: counter(footnote);

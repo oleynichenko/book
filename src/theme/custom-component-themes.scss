@@ -10,6 +10,7 @@
 @import '../app/book/article/article-menu/article-menu.theme';
 @import '../app/book/article/comment-menu/comment-menu.theme';
 @import '../app/book/article/article-content/article-content.theme';
+@import '../app/book/language-menu/language-menu.theme';
 @import '../app/book/header/header.theme';
 @import './global.theme';
 
@@ -37,5 +38,7 @@
   @include header-typography($config);
   @include article-typography($config);
   @include authors-typography($config);
+  @include language-menu-typography($config);
+
 }
 
