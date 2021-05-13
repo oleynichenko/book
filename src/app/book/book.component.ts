@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material/sidenav';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';

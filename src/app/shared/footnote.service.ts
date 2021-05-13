@@ -1,5 +1,5 @@
 import {Injectable, Renderer2} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {first} from 'rxjs/operators';
 
 @Injectable({
@@ -63,7 +63,7 @@ export class FootnoteService {
 
       snackBarRef.afterDismissed()
         .pipe(first())
-        .subscribe(info => {
+        .subscribe(() => {
           this.renderer.removeClass(
             event.target,
             'loaded-content__footnote--chosen'

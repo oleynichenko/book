@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {Direction} from '@angular/cdk/bidi';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
