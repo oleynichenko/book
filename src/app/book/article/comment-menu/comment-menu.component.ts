@@ -21,14 +21,14 @@ export class CommentMenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  onLangMenuSelect(value) {
+  onLangMenuSelect(value: any) {
     this.commentService.langSelectValue = value;
     this.commentService.setCommentsSelect(value);
     this.commentService.commentsSelectValue = null;
     this.commentService.comment = null;
   }
 
-  onCommentsMenuSelect(value) {
+  onCommentsMenuSelect(value: any) {
     this.commentService.commentsSelectValue = value;
     this.commentService.setComment(value);
   }

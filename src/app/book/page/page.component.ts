@@ -17,7 +17,7 @@ export class PageComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               public translate: TranslateService,
               public bookService: BookService,
-              @Inject(APP_CONFIG) private config) { }
+              @Inject(APP_CONFIG) private config: any) { }
 
   ngOnInit() {
     this.content$ = this.route.data.pipe(

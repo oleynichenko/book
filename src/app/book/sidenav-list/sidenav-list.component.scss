@@ -1,5 +1,5 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
 :host ::ng-deep .mat-list-base .mat-list-item {
   height: auto;
@@ -20,8 +20,8 @@
 
   &::ng-deep .mat-content {
     padding-right: 8px;
-    line-height: $sideMenuLineHeight;
-    max-height: $sideMenuLineHeight*2;
+    line-height: var.$sideMenuLineHeight;
+    max-height: var.$sideMenuLineHeight*2;
   }
 }
 

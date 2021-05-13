@@ -1,7 +1,7 @@
-@import "variables";
+@use 'variables' as var;
 
 :host {
   display: block;
-  max-width: $max-content-width;
+  max-width: var.$max-content-width;
   margin: 0 auto;
 }

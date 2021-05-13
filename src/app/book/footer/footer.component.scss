@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 .footer {
   min-height: 48px;
@@ -16,14 +16,14 @@
   text-decoration: none;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .footer {
     min-height: 56px;
     padding: 0 24px;
   }
 }
 
-@media ($desktop-width) {
+@media (var.$desktop-width) {
   .footer {
     padding: 0 32px;
   }

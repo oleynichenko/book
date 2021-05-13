@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 .submenu {
   display: flex;
@@ -27,7 +27,7 @@
   height: 4px;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .submenu {
     justify-content: center;
   }

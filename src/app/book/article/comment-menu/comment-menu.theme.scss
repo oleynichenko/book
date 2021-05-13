@@ -1,30 +1,30 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin comment-menu-typography($config) {
+@mixin typography($config) {
   .comment-menu__panel .mat-option .mat-option-text {
-    font-size: mat-font-size($config, body-1);
+    font-size: mat.font-size($config, 'body-1');
   }
 
   .comment-menu__field .comment-menu__select {
-    font-size: mat-font-size($config, body-1);
+    font-size: mat.font-size($config, 'body-1');
   }
 
   .comment-menu__label {
-    font-size: mat-font-size($config, body-1);
+    font-size: mat.font-size($config, 'body-1');
   }
 
-  @media ($tablet-width) {
+  @media (var.$tablet-width) {
     .comment-menu__panel .mat-option .mat-option-text {
-      font-size: mat-font-size($config, subheading-2);
+      font-size: mat.font-size($config, 'subheading-2');
     }
 
     .comment-menu__field .comment-menu__select {
-      font-size: mat-font-size($config, subheading-2);
+      font-size: mat.font-size($config, 'subheading-2');
     }
 
     .comment-menu__label {
-      font-size: mat-font-size($config, subheading-2);
+      font-size: mat.font-size($config, 'subheading-2');
     }
   }
 }

@@ -1,44 +1,48 @@
 // import custom component themes
 // unofficial naming convention to support nice ordering of files in IDE
 // to see theme under the original style file of the component
-@import '../app/book/footer/footer.theme';
-@import '../app/book/sub-menu/sub-menu.theme';
-@import '../app/book/main-menu/main-menu.theme';
-@import '../app/book/authors/authors.theme';
-@import '../app/book/sidenav-list/sidenav-list.theme';
-@import '../app/book/article/article.theme';
-@import '../app/book/article/article-menu/article-menu.theme';
-@import '../app/book/article/comment-menu/comment-menu.theme';
-@import '../app/book/article/article-content/article-content.theme';
-@import '../app/book/language-menu/language-menu.theme';
-@import '../app/book/header/header.theme';
-@import './global.theme';
+@use '../app/book/footer/footer.theme';
+@use '../app/book/sub-menu/sub-menu.theme';
+@use '../app/book/main-menu/main-menu.theme';
+@use '../app/book/authors/authors.theme';
+@use '../app/book/sidenav-list/sidenav-list.theme';
+@use '../app/book/article/article.theme';
+@use '../app/book/article/article-menu/article-menu.theme';
+@use '../app/book/article/comment-menu/comment-menu.theme';
+@use '../app/book/article/article-content/article-content.theme';
+@use '../app/book/language-menu/language-menu.theme';
+@use '../app/book/header/header.theme';
+@use './global.theme';
+@use './loaded.theme';
 
 // you only have to add additional components here (instead of in every theme class)
 
-@mixin custom-components-theme($theme) {
-  @include global-theme($theme);
-  @include loaded-theme($theme);
-  @include footer-theme($theme);
-  @include sub-menu-theme($theme);
-  @include article-menu-theme($theme);
-  @include main-menu-theme($theme);
-  @include sidenav-list-theme($theme);
-  @include sidenav-list-theme($theme);
-  @include article-content-theme($theme);
-  @include authors-menu-theme($theme);
+@mixin components-color($color-config) {
+  @include global.color($color-config);
+  @include loaded.color($color-config);
+  @include footer.color($color-config);
+  @include sub-menu.color($color-config);
+  @include article-menu.color($color-config);
+  @include main-menu.color($color-config);
+  @include sidenav-list.color($color-config);
+  @include article-content.color($color-config);
+  @include authors.color($color-config);
 }
 
-@mixin custom-components-typography($config) {
-  @include main-menu-typography($config);
-  @include sub-menu-typography($config);
-  @include article-menu-typography($config);
-  @include comment-menu-typography($config);
-  @include sidenav-list-typography($config);
-  @include header-typography($config);
-  @include article-typography($config);
-  @include authors-typography($config);
-  @include language-menu-typography($config);
-
+@mixin components-typography($typo-config) {
+  @include sub-menu.typography($typo-config);
+  @include main-menu.typography($typo-config);
+  @include article-menu.typography($typo-config);
+  @include comment-menu.typography($typo-config);
+  @include sidenav-list.typography($typo-config);
+  @include header.typography($typo-config);
+  @include article.typography($typo-config);
+  @include authors.typography($typo-config);
+  @include language-menu.typography($typo-config);
 }
+
+@mixin two-lang-components-typography($typo-config, $typo-config-he) {
+  @include loaded.typography($typo-config, $typo-config-he);
+}
+
 

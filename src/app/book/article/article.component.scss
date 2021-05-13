@@ -1,7 +1,7 @@
-@import "variables";
+@use 'variables' as var;
 
 .article {
-  max-width: $max-content-width;
+  max-width: var.$max-content-width;
   margin: 0 auto;
 }
 
@@ -20,7 +20,7 @@
   margin-bottom: 4px;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .article__title {
     margin-bottom: 24px;
   }

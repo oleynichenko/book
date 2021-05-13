@@ -1,15 +1,15 @@
-@import "variables";
+@use 'variables' as var;
 
 :host {
   display: block;
-  max-width: $max-content-width;
+  max-width: var.$max-content-width;
   margin: 0 auto;
 }
 
 .author {
   display: flex;
   flex-direction: column;
-  max-width: $max-vert-card-height;
+  max-width: var.$max-vert-card-height;
 
   margin-left: auto;
   margin-right: auto;
@@ -66,7 +66,7 @@
   height: 100%;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .author {
     flex-direction: row;
     max-width: none;

@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'variables';
+@use 'mixins';
+@use 'variables' as var;
 
 .lessons {
   margin-top: 60px;
@@ -13,7 +13,7 @@
 .lesson__sub-chunk {
   margin-right: 4px;
 }
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .lessons {
     margin-top: 65px;
   }

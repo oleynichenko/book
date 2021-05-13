@@ -11,7 +11,7 @@ export class FootnoteService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  static getFootnoteName(id, lang) {
+  static getFootnoteName(id: string, lang: string) {
     return `${lang}_${id}`;
   }
 
@@ -45,10 +45,11 @@ export class FootnoteService {
     });
   }
 
-  private onFootnoteClick(event) {
+  private onFootnoteClick(event: any) {
     if (!event.target.classList.contains('loaded-content__footnote--chosen')) {
       const data = event.target.dataset;
 
+      // @ts-ignore
       const footnoteText = this.footnotes[data.footnote]
         || 'Sorry, this footnote is not set yet...';
 

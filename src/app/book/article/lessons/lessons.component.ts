@@ -27,7 +27,7 @@ export class LessonsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUrl(src) {
+  getUrl(src: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(src);
   }
 

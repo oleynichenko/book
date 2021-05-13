@@ -1,20 +1,21 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin authors-menu-theme($theme) {
-  $foreground: map-get($theme, foreground);
+@mixin color($color-config) {
+  $foreground: map.get($color-config, foreground);
 
   .author__img {
-    border-color: mat-color($foreground, divider);
+    border-color: mat.get-color-from-palette($foreground, divider);
   }
 
   .author__icon {
-    fill: mat-color($foreground, icons);
+    fill: mat.get-color-from-palette($foreground, icons);
   }
 }
 
-@mixin authors-typography($config) {
+@mixin typography($config) {
 
-  @media ($tablet-width) {
+  @media (var.$tablet-width) {
   }
 }

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 .loading {
   display: flex;
@@ -9,7 +9,7 @@
   height: 140px;
 
   background-color: transparent;
-  z-index: $loading;
+  z-index: var.$loading;
 }
 
 .loading--fixed {

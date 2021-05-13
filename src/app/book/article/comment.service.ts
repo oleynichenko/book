@@ -24,16 +24,16 @@ export class CommentService {
   constructor(private http: HttpClient,
               private translate: TranslateService,
               private bookService: BookService,
-              @Inject(APP_CONFIG) private config,
-              @Inject(API_URL) private apiUrl) { }
+              @Inject(APP_CONFIG) private config: any,
+              @Inject(API_URL) private apiUrl: any) { }
 
-  getCommentMenu(article, lang) {
+  getCommentMenu(article: string, lang: string) {
     const url = this.apiUrl.getCommentMenuUrl(article, lang, this.bookService.bookId);
 
     return this.http.get(url);
   }
 
-  setCommentMenu(data) {
+  setCommentMenu(data: any) {
     this.setLangSelect(data);
     this.langSelectValue = null;
     this.setCommentsSelect(this.langSelectValue);
@@ -41,13 +41,13 @@ export class CommentService {
     this.setComment(this.commentsSelectValue);
   }
 
-  setLangSelect(data) {
+  setLangSelect(data: any) {
     this.langSelect = data;
   }
 
-  setCommentsSelect(lang) {
+  setCommentsSelect(lang: any) {
     if (lang) {
-      const comments = this.langSelect.find((i) => {
+      const comments = this.langSelect.find((i: any) => {
         return i.langId === lang;
       }).comments;
 
@@ -64,13 +64,13 @@ export class CommentService {
   }
 
   // изменение языка отображения в CommentMenu
-  changeCommentMenuTranslation(lang) {
-    const langs = this.langSelect.map((i) => i.langId);
+  changeCommentMenuTranslation(lang: any) {
+    const langs = this.langSelect.map((i: any) => i.langId);
 
     this.http.get(this.apiUrl.getLangsUrl(lang, langs, this.bookService))
       .subscribe((data: any) => {
-        const newLangSelect = this.langSelect.map((i) => {
-          i.name = data.find((j) => j.langId === i.langId).name;
+        const newLangSelect = this.langSelect.map((i: any) => {
+          i.name = data.find((j: any) => j.langId === i.langId).name;
           return i;
         });
 
@@ -82,7 +82,7 @@ export class CommentService {
       });
   }
 
-  setComment(comment) {
+  setComment(comment: any) {
     if (comment) {
       this.loadingStatus.next(true);
 
@@ -118,10 +118,10 @@ export class CommentService {
     }
   }
 
-  getFootnotes(footnotesData: Footnote[], lang) {
-    const res = {};
+  getFootnotes(footnotesData: Footnote[], lang: string) {
+    const res: any = {};
 
-    footnotesData.forEach((f) => {
+    footnotesData.forEach((f: Footnote) => {
       res[FootnoteService.getFootnoteName(f.id, lang)] = f.text;
     });
 

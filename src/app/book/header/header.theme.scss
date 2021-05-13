@@ -1,14 +1,14 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin header-typography($config) {
+@mixin typography($config) {
   .header__logo {
-    @include mat-typography-level-to-styles($config, title);
+    @include mat.typography-level($config, title);
   }
 
-  @media ($tablet-width) {
+  @media (var.$tablet-width) {
     .header__logo {
-      @include mat-typography-level-to-styles($config, headline);
+      @include mat.typography-level($config, headline);
     }
   }
 }
