@@ -1,5 +1,5 @@
 import {Injectable, Renderer2} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {first} from 'rxjs/operators';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class FootnoteService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  static getFootnoteName(id, lang) {
+  static getFootnoteName(id: string, lang: string) {
     return `${lang}_${id}`;
   }
 
@@ -45,10 +45,11 @@ export class FootnoteService {
     });
   }
 
-  private onFootnoteClick(event) {
+  private onFootnoteClick(event: any) {
     if (!event.target.classList.contains('loaded-content__footnote--chosen')) {
       const data = event.target.dataset;
 
+      // @ts-ignore
       const footnoteText = this.footnotes[data.footnote]
         || 'Sorry, this footnote is not set yet...';
 
@@ -63,7 +64,7 @@ export class FootnoteService {
 
       snackBarRef.afterDismissed()
         .pipe(first())
-        .subscribe(info => {
+        .subscribe(() => {
           this.renderer.removeClass(
             event.target,
             'loaded-content__footnote--chosen'

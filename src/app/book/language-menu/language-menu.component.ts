@@ -22,7 +22,7 @@ export class LanguageMenuComponent implements OnInit {
     this.langMenu$ = this.languageMenuService.langMenu;
   }
 
-  onLangMenuItemClick(langId) {
+  onLangMenuItemClick(langId: any) {
     // для плавного исчезновения langMenu
     setTimeout(() => {
       this.languageMenuService.onLangChanging(langId);

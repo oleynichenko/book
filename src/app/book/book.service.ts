@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {Direction} from '@angular/cdk/bidi';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
@@ -27,14 +27,14 @@ export class BookService {
               private breakpointObserver: BreakpointObserver,
               private snackBar: MatSnackBar,
               private injector: Injector,
-              @Inject(APP_CONFIG) private config,
-              @Inject(API_URL) private apiUrl,
+              @Inject(APP_CONFIG) private config: any,
+              @Inject(API_URL) private apiUrl: any,
               @Inject(DOCUMENT) private document: Document,
               @Optional() @Inject(REQUEST) private request: any,
               @Inject(PLATFORM_ID) private platformId: object,
               private titleService: Title) {}
 
-  setDirection(lang) {
+  setDirection(lang: string) {
     this.dir = (lang === 'he') ? 'rtl' : 'ltr';
   }
 
@@ -46,7 +46,7 @@ export class BookService {
     this.loadingStatus.next(false);
   }
 
-  changeTypography(lang) {
+  changeTypography(lang: any) {
     if (isPlatformBrowser(this.platformId)) {
       if (lang === 'he') {
         this.renderer.addClass(this.document.documentElement, 'he-theme');
@@ -64,7 +64,7 @@ export class BookService {
     }
   }
 
-  showSnackBar(message, action, duration) {
+  showSnackBar(message: any, action: any, duration: any) {
     this.snackBar.open(message, action, {duration});
   }
 
@@ -94,10 +94,10 @@ export class BookService {
     return sources[currentLang].defaultAuthor;
   }
 
-  private modifyArticleMenuData(data) {
+  private modifyArticleMenuData(data: any) {
     const sources = this.bookData.getValue().sources;
 
-    return data.filter((a) => {
+    return data.filter((a: any) => {
       const sourcesByLang = sources[a.langId].authors;
 
       if (sourcesByLang.includes(a.authorId)) {
@@ -113,7 +113,7 @@ export class BookService {
     });
   }
 
-  getArticleMenu(article, lang) {
+  getArticleMenu(article: any, lang: any) {
     const url = this.apiUrl.getArticleMenuUrl(article, lang, this.bookId);
 
     return this.http.get(url).pipe(
@@ -121,7 +121,7 @@ export class BookService {
     );
   }
 
-  getArticle(article, lang, author) {
+  getArticle(article: any, lang: any, author: any) {
     const url = this.apiUrl.getArticleUrl(article, lang, author, this.bookId);
 
     const options = {
@@ -137,7 +137,7 @@ export class BookService {
       : this.request.subdomains[0];
   }
 
-  getBookLangs(bookId) {
+  getBookLangs(bookId: any) {
     const options = {
       headers: {appInterfaceDisabled: 'true'}
     };
@@ -145,7 +145,7 @@ export class BookService {
     return this.http.get(this.apiUrl.getBookLangsUrl(bookId), options);
   }
 
-  getPage(page, lang) {
+  getPage(page: any, lang: any) {
     const url = this.apiUrl.getPageUrl(page, lang, this.bookId);
 
     const options = {
@@ -157,7 +157,7 @@ export class BookService {
     );
   }
 
-  getAuthors(lang) {
+  getAuthors(lang: any) {
     const url = this.apiUrl.getAuthorsUrl(lang, this.bookId);
 
     const options = {
@@ -167,7 +167,7 @@ export class BookService {
     return this.http.get(url, options);
   }
 
-  navigateByLangUrl(langId) {
+  navigateByLangUrl(langId: any) {
     const newLangUrl = this.router.url.replace(
       `/${this.translate.currentLang}`,
       `/${langId}`
@@ -176,7 +176,7 @@ export class BookService {
     this.router.navigateByUrl(newLangUrl);
   }
 
-  getArticleLessons(articleId) {
+  getArticleLessons(articleId: any) {
     const url = this.apiUrl.getLessonsUrl(articleId, this.bookId);
 
     const options = {

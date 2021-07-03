@@ -1,16 +1,17 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin main-menu-theme($theme) {
-  $primary: map-get($theme, primary);
+@mixin color($color-config) {
+  $primary:  map.get($color-config, 'primary');
 
   .mainmenu__line--color:after {
-    background-color: mat-color($primary, default-contrast);
+    background-color: mat.get-color-from-palette($primary, default-contrast);
   }
 }
 
-@mixin main-menu-typography($config) {
+@mixin typography($config) {
   .mainmenu__link {
-    font-size: mat-font-size($config, subheading-2);
+    font-size: mat.font-size($config, 'subheading-2');
   }
 }

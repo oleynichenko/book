@@ -35,23 +35,23 @@ export const AppConfig: IAppConfig = {
 };
 
 export const ApiUrl = {
-  getBookLangsUrl: (book) => {
+  getBookLangsUrl: (book: string) => {
     return `${environment.apiEndpoint}/books/${book}/langs`;
   },
 
-  getBookDataUrl: (lang, book) => {
+  getBookDataUrl: (lang: string, book: string) => {
     return `${environment.apiEndpoint}/books/${book}/${lang}`;
   },
 
-  getArticleUrl: (article, lang, author, book) => {
+  getArticleUrl: (article: string, lang: string, author: string, book: string) => {
     return `${environment.apiEndpoint}/articles/${article}/${author}/${lang}/${book}`;
   },
 
-  getArticleMenuUrl: (article, lang, book) => {
+  getArticleMenuUrl: (article: string, lang: string, book: string) => {
     return `${environment.apiEndpoint}/articles/menu/${article}/${lang}/${book}`;
   },
 
-  getCommentUrl: (comment, lang, author, article, book, translator?) => {
+  getCommentUrl: (comment: string, lang: string, author: string, article: string, book: string, translator?: string) => {
     const queryParams = translator
       ? `/?translatorId=${translator}`
       : '';
@@ -59,29 +59,29 @@ export const ApiUrl = {
     return `${environment.apiEndpoint}/comments/${comment}/${author}/${lang}/${book}/${article}${queryParams}`;
   },
 
-  getCommentMenuUrl: (article, lang, book) => {
+  getCommentMenuUrl: (article: string, lang: string, book: string) => {
     return `${environment.apiEndpoint}/comments/menu/${article}/${lang}/${book}`;
   },
 
-  getLangsUrl: (lang, langs: string[]) => {
+  getLangsUrl: (lang: string, langs: string[]) => {
     const langsString = langs.join('-');
 
     return `${environment.apiEndpoint}/langs/${lang}/${langsString}`;
   },
 
-  getPageUrl: (page, lang, book) => {
+  getPageUrl: (page: string, lang: string, book: string) => {
     return `${environment.apiEndpoint}/pages/${page}/${lang}/${book}`;
   },
 
-  getAuthorsUrl: (lang, book) => {
+  getAuthorsUrl: (lang: string, book: string) => {
     return `${environment.apiEndpoint}/authors/${lang}/${book}`;
   },
 
-  getLessonsUrl: (article, book) => {
+  getLessonsUrl: (article: string, book: string) => {
     return `${environment.apiEndpoint}/lessons/${article}/${book}`;
   },
 
-  getImgStoreUrl: (img) => {
+  getImgStoreUrl: (img: string) => {
     return `${environment.apiEndpoint}/img/${img}`;
   }
 };

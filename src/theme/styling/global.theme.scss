@@ -1,18 +1,20 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin global-theme($theme) {
-  $primary: map-get($theme, primary);
+@mixin color($color-config) {
+  $primary:  map.get($color-config, 'primary');
+  $accent:  map.get($color-config, 'accent');
 
   .global-link--primary {
     color: inherit;
 
     &:hover {
-      color: rgba(mat-color($primary, default-contrast), 0.8);
+      color: rgba(mat.get-color-from-palette($primary, default-contrast), 0.8);
     }
 
     &:active {
-      color: rgba(mat-color($primary, default-contrast), 0.7);
+      color: rgba(mat.get-color-from-palette($primary, default-contrast), 0.7);
     }
   }
 
@@ -20,185 +22,11 @@
     color: inherit;
 
     &:hover {
-      color: rgba(mat-color($accent, default-contrast), 0.7);
+      color: rgba(mat.get-color-from-palette($accent, default-contrast), 0.7);
     }
 
     &:active {
-      color: rgba(mat-color($accent, default-contrast), 0.5);
-    }
-  }
-}
-
-@mixin loaded-theme($theme) {
-  $primary: map-get($theme, primary);
-  $foreground: map-get($theme, foreground);
-
-  .loaded-content a {
-    color: mat-color($primary);
-
-    &:hover {
-      color: rgba(mat-color($primary), 0.8);
-    }
-
-    &:active {
-      color: rgba(mat-color($primary), 0.7);
-    }
-  }
-
-  .loaded-content .loaded-content__footnote--chosen::after {
-    background-color:rgba(mat-color($accent), 0.3);;
-  }
-
-  .loaded-content img {
-    border-color: mat-color($foreground, divider);
-  }
-}
-
-@mixin loaded-typography($config, $config-he) {
-  .loaded-content {
-    counter-reset: footnote 0;
-  }
-
-  .loaded-content p {
-    @include mat-typography-level-to-styles($config, subheading-1);
-    line-height: 22px;
-    margin-top: 0;
-    margin-bottom: 12px;
-    text-align: justify;
-    direction: ltr;
-  }
-
-  .loaded-content--he p,
-  .loaded-content .loaded-content__p--he {
-    @include mat-typography-level-to-styles($config-he, subheading-1);
-    line-height: 22px;
-    direction: rtl;
-  }
-
-  .loaded-content p strong {
-    font-weight: 500;
-  }
-
-  .loaded-content h1 {
-    @include mat-typography-level-to-styles($config, display-1);
-    margin-top: 0;
-    direction: ltr;
-  }
-
-  .loaded-content--he h1 {
-    @include mat-typography-level-to-styles($config-he, display-1);
-    direction: rtl;
-  }
-
-  .loaded-content ul {
-    padding: 0 0 0 24px;
-    margin: 0 0 8px;
-
-    @include mat-typography-level-to-styles($config, subheading-1);
-    line-height: 22px;
-    text-align: justify;
-    direction: ltr;
-    list-style: none;
-  }
-
-  .loaded-content ul li {
-    line-height: 20px;
-    margin-bottom: 6px;
-    text-align: left;
-  }
-
-  .loaded-content p + ul {
-    margin-top: -8px;
-  }
-
-  .loaded-content a {
-    text-decoration: none;
-  }
-
-  .loaded-content .loaded-content__footnote {
-    position: relative;
-    display: inline-block;
-    width: 10px;
-
-    cursor: pointer;
-  }
-
-  .loaded-content .loaded-content__footnote::after {
-    counter-increment: footnote 1;
-    content: counter(footnote);
-    font-size: 70%;
-    position: absolute;
-    left: -5px;
-    bottom: 3px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    line-height: 19px;
-    text-align: center;
-  }
-
-  .loaded-content img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-
-    margin: 0 auto 24px;
-
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  @media ($tablet-width) {
-    .loaded-content p {
-      @include mat-typography-level-to-styles($config, subheading-2);
-      line-height: 24px;
-    }
-
-    .loaded-content--he p,
-    .loaded-content .loaded-content__p--he {
-      @include mat-typography-level-to-styles($config-he, subheading-2);
-      line-height: 24px;
-    }
-
-    .loaded-content h1 {
-      @include mat-typography-level-to-styles($config, display-2);
-    }
-
-    .loaded-content--he h1 {
-      @include mat-typography-level-to-styles($config-he, display-2);
-    }
-
-    .loaded-content ul {
-      padding-right: 32px;
-      margin-bottom: 12px;
-
-      @include mat-typography-level-to-styles($config, subheading-2);
-      line-height: 24px;
-    }
-
-    .loaded-content p + ul {
-      margin-top: -12px;
-    }
-
-    .loaded-content img {
-      max-width: 245px;
-      height: auto;
-    }
-
-    .loaded-content img[data-img=right],
-    .loaded-content--he img[data-img=left] {
-      float: right;
-
-      margin-left: 24px;
-      margin-right: 0;
-    }
-
-    .loaded-content img[data-img=left],
-    .loaded-content--he img[data-img=right] {
-      float: left;
-
-      margin-left: 0;
-      margin-right: 24px;
+      color: rgba(mat.get-color-from-palette($accent, default-contrast), 0.5);
     }
   }
 }

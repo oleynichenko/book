@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 .article-content__block {
   position: relative;
@@ -14,7 +14,7 @@
   width: 2px;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .article-content__block {
     padding-left: 20px;
     margin-bottom: 32px;

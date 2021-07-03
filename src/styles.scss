@@ -1,24 +1,36 @@
-@import "./theme/fonts.scss";
+@use './theme/fonts.scss';
+@use './theme/simplebar.css';
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
-@import './theme/theme.scss';
-@import './theme/custom-component-themes.scss';
+@use '~@angular/material' as mat;
+@use './theme/custom-component-themes.scss' as custom;
 
-// Be sure that you only ever include this mixin once!
-$config: mat-typography-config();
-$config-he: mat-typography-config($font-family: 'Rubik');
+@include mat.core();
 
-@include mat-core($config);
-@include angular-material-theme($theme);
+$primary: mat.define-palette(mat.$deep-purple-palette, 500);
+$accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$red-palette);
 
-@include custom-components-theme($theme);
-@include custom-components-typography($config);
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+  typography: mat.define-typography-config()
+));
+
+@include mat.all-component-themes($theme);
+$color-config: mat.get-color-config($theme);
+$typo-config: mat.get-typography-config($theme);
+$typo-config-he: mat.define-typography-config($font-family: 'Rubik');
+
+@include custom.components-color($color-config);
+@include custom.components-typography($typo-config);
+
 
 /* You can add global styles to this file, and also import other style files */
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: 'Material Icons', sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -34,22 +46,15 @@ $config-he: mat-typography-config($font-family: 'Rubik');
 }
 
 .he-theme {
-  @include mat-list-typography($config-he);
-  @include mat-button-typography($config-he);
-  @include mat-menu-typography($config-he);
-  @include mat-tabs-typography($config-he);
+  @include mat.list-typography($typo-config-he);
+  @include mat.button-typography($typo-config-he);
+  @include mat.menu-typography($typo-config-he);
+  @include mat.tabs-typography($typo-config-he);
 
-  @include custom-components-typography($config-he);
+  @include custom.components-typography($typo-config-he);
 }
 
-@include loaded-typography($config, $config-he);
-
-@import './theme/simplebar.css';
-
-
-html {
-
-}
+@include custom.two-lang-components-typography($typo-config, $typo-config-he);
 
 .overflow-y {
   overflow-y: scroll;

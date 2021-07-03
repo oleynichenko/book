@@ -1,20 +1,21 @@
-@import '~@angular/material/theming';
+@use 'sass:map';
+@use '~@angular/material' as mat;
 
-@mixin sidenav-list-typography($config) {
+@mixin typography($config) {
   // чтобы перебить .mat-list-base .mat-list-item
   .nav .nav__item {
-    @include mat-typography-level-to-styles($config, subheading-2);
+    @include mat.typography-level($config, 'subheading-2');
   }
 
   .nav__title {
-    @include mat-typography-level-to-styles($config, subheading-2);
+    @include mat.typography-level($config, 'subheading-2');
   }
 }
 
-@mixin sidenav-list-theme($theme) {
-  $background: map-get($theme, background);
+@mixin color($color-config) {
+  $background: map.get($color-config, background);
 
   .nav__item--active {
-    background: mat-color($background, 'hover');
+    background: mat.get-color-from-palette($background, 'hover');
   }
 }

@@ -1,5 +1,5 @@
 import {AfterViewInit, Directive, ElementRef} from '@angular/core';
-import SimpleBar from 'simplebar/dist/simplebar';
+import * as SimpleBar from 'simplebar/dist/simplebar';
 
 @Directive({
   selector: '[appSimpleBar]'

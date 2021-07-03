@@ -1,8 +1,8 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
-@mixin language-menu-typography($config) {
+@mixin typography($config) {
   .lang-menu__btn {
-    font-size: mat-font-size($config, subheading-2);
+    font-size: mat.font-size($config, 'subheading-2');
     letter-spacing: 0.5px;
   }
 }

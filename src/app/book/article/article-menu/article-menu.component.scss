@@ -1,4 +1,4 @@
-@import "variables";
+@use 'variables' as var;
 
 .article-menu__card {
   display: flex;
@@ -76,7 +76,7 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .article-menu__title {
     margin-bottom: 8px;
   }

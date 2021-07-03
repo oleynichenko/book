@@ -1,42 +1,43 @@
-@import '~@angular/material/theming';
-@import 'variables';
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use 'variables' as var;
 
-@mixin article-menu-theme($theme) {
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+@mixin color($color-config) {
+  $background: map.get($color-config, background);
+  $foreground: map.get($color-config, foreground);
 
   .article-menu__card, .article-menu__item {
-    background: mat-color($background, card);
-    color: mat-color($foreground, text);
+    background: mat.get-color-from-palette($background, card);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   .article-menu__list,
   .article-menu__item {
-    border-color: mat-color($foreground, divider);
+    border-color: mat.get-color-from-palette($foreground, divider);
   }
 
   .article-menu__item.cdk-drag-preview {
-    @include _mat-theme-overridable-elevation(4, $theme);
+    @include mat.overridable-elevation(4);
   }
 }
 
-@mixin article-menu-typography($config) {
+@mixin typography($config) {
   .article-menu__title {
-    @include mat-typography-level-to-styles($config, subheading-2);
+    @include mat.typography-level($config, 'subheading-2');
     font-weight: 500;
   }
 
   .article-menu__tip {
-    @include mat-typography-level-to-styles($config, caption);
+    @include mat.typography-level($config, 'caption');
   }
 
   .article-menu__item {
-    @include mat-typography-level-to-styles($config, body-1);
+    @include mat.typography-level($config, 'body-1');
   }
 
-  @media ($tablet-width) {
+  @media (var.$tablet-width) {
     .article-menu__title {
-      @include mat-typography-level-to-styles($config, title);
+      @include mat.typography-level($config, 'title');
     }
   }
 }

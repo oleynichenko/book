@@ -4,8 +4,8 @@ export class MenuItem {
 
 export interface Lesson {
   src: string;
-  langNames: object;
-  authorNames: object;
+  langNames: any;
+  authorNames: any;
   date?: Date;
 }
 export interface Footnote {

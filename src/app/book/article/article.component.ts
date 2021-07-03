@@ -12,10 +12,10 @@ import {CommentService} from './comment.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-  articles = [];
-  lessons = [];
+  articles: any = [];
+  lessons: any = [];
   articleTitle: string;
-  articleMenuData;
+  articleMenuData: any;
   articleId: string;
   paramSubscription: Subscription;
   trSubscription: Subscription;
@@ -70,15 +70,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
       });
   }
 
-  private isArticleDownloaded(lang, author) {
-    return this.articles.findIndex((a) => {
+  private isArticleDownloaded(lang: string, author: string) {
+    return this.articles.findIndex((a: any) => {
       return a.langId === lang && a.authorId === author;
     }) !== -1;
   }
 
-  onMenuChanges(sources) {
+  onMenuChanges(sources: any) {
     // создаем массив на запросов на отсутствующие статьи
-    const missingArticlesRequests = sources.reduce((res, s) => {
+    const missingArticlesRequests = sources.reduce((res: any, s: any) => {
       if (!this.isArticleDownloaded(s.langId, s.authorId)) {
         res.push(this.bookService.getArticle(
           this.articleId,
@@ -91,7 +91,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }, []);
 
     if (missingArticlesRequests.length > 0) {
-      forkJoin(...missingArticlesRequests).subscribe((data) => {
+      forkJoin(...missingArticlesRequests).subscribe((data: any) => {
         this.articles = this.sortArticles(sources, data);
       });
     } else {
@@ -102,10 +102,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   private getArticleTitle(lang: string): string {
     let defaultArticleData = this.articleMenuData
-      .find(i => i.langId === lang && i.authorId === this.bookService.defaultAuthor);
+      .find((i: any) => i.langId === lang && i.authorId === this.bookService.defaultAuthor);
 
     if (!defaultArticleData) {
-      defaultArticleData = this.articleMenuData.find(i => i.langId === lang);
+      defaultArticleData = this.articleMenuData.find((i: any) => i.langId === lang);
 
       if (!defaultArticleData) {
         defaultArticleData = this.articleMenuData[0];
@@ -115,11 +115,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     return defaultArticleData.title;
   }
 
-  private sortArticles(sources, data = []) {
+  private sortArticles(sources: any, data: any = []) {
     const articles = this.articles.concat(data);
 
-    return sources.map((s) => {
-      return articles.find((a) => {
+    return sources.map((s: any) => {
+      return articles.find((a: any) => {
         return a.langId === s.langId && a.authorId === s.authorId;
       });
     });

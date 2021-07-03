@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 .header {
   min-height: auto;
@@ -38,7 +38,7 @@
   flex-grow: 0;
 }
 
-@media ($tablet-width) {
+@media (var.$tablet-width) {
   .header {
     margin-bottom: 72px;
   }
@@ -56,11 +56,11 @@
   }
 }
 
-@media ($desktop-width) {
+@media (var.$desktop-width) {
   .header {
     position: fixed;
     margin-bottom: 0;
-    z-index: $indexHeader;
+    z-index: var.$indexHeader;
   }
 
   .header__row--first {

@@ -19,8 +19,8 @@ export class AuthorsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               public translate: TranslateService,
               public bookService: BookService,
-              @Inject(API_URL) private apiUrl,
-              @Inject(APP_CONFIG) private config) { }
+              @Inject(API_URL) private apiUrl: any,
+              @Inject(APP_CONFIG) private config: any) { }
 
   ngOnInit() {
     this.content$ = this.route.data.pipe(
@@ -31,7 +31,7 @@ export class AuthorsComponent implements OnInit {
       map((data: any) => {
         const authors = data.content[1];
 
-        return authors.map((a) => {
+        return authors.map((a: any) => {
           if (a.img) {
             a.img = this.apiUrl.getImgStoreUrl(a.img);
           }

@@ -18,21 +18,21 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
   @Output() menuChanged = new EventEmitter();
 
   @Input() articleId: string;
-  @Input() set menuData(value) {
+  @Input() set menuData(value: any) {
     this._menu = value;
 
     if (this.displayedMenuItems) {
       // удаляем из displayedMenuItems те которых нет в новом меню
-      this.displayedMenuItems = this.displayedMenuItems.filter((i) => {
-        return value.find((j) => {
+      this.displayedMenuItems = this.displayedMenuItems.filter((i: any) => {
+        return value.find((j: any) => {
           return i.langId === j.langId && i.authorId === j.authorId;
         });
       });
 
       if (this.displayedMenuItems.length > 0) {
         // почистить availableMenuItems от тех что есть в displayedMenuItems
-        this.availableMenuItems = value.filter((i) => {
-          return !this.displayedMenuItems.find((j) => {
+        this.availableMenuItems = value.filter((i: any) => {
+          return !this.displayedMenuItems.find((j: any) => {
             return i.langId === j.langId && i.authorId === j.authorId;
           });
         });
@@ -79,11 +79,11 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getDefaultMenuItemIndex(menu) {
+  private getDefaultMenuItemIndex(menu: any) {
     const lang = this.translate.currentLang;
     const author = this.bookService.defaultAuthor;
 
-    let menuItemIndex = menu.findIndex((i) => {
+    let menuItemIndex = menu.findIndex((i: any) => {
       return i.langId === lang && i.authorId === author;
     });
 
@@ -91,7 +91,7 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
     if (menuItemIndex !== -1) {
       return menuItemIndex;
     } else {
-      menuItemIndex = menu.findIndex((i) => {
+      menuItemIndex = menu.findIndex((i: any) => {
         return i.langId === lang;
       });
 
@@ -104,15 +104,16 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  private changeTitle(arr, data) {
-    return arr.map((i) => {
-      i.menuTitle = data.find((j) => i.langId === j.langId && i.authorId === j.authorId).menuTitle;
+  private changeTitle(arr: any, data: any) {
+    return arr.map((i: any) => {
+      i.menuTitle = data.find((j: any) => i.langId === j.langId && i.authorId === j.authorId).menuTitle;
 
       return i;
     });
   }
 
-  dropInAvailable(event: CdkDragDrop<string[]>) {
+  // dropInAvailable(event: CdkDragDrop<string[]>) {
+  dropInAvailable(event: any) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -131,7 +132,8 @@ export class ArticleMenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  dropInDisplayed(event: CdkDragDrop<string[]>) {
+  // dropInDisplayed(event: CdkDragDrop<string[]>) {
+  dropInDisplayed(event: any) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

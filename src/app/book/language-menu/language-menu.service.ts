@@ -15,19 +15,19 @@ export class LanguageMenuService {
   constructor(private http: HttpClient,
               private bookService: BookService,
               private translate: TranslateService,
-              @Inject(API_URL) private apiUrl) { }
+              @Inject(API_URL) private apiUrl: any) { }
 
   getLangMenu(lang: string, langs: Langs) {
     const url = this.apiUrl.getLangsUrl(lang, langs);
 
     return this.http.get(url).pipe(
-      tap((data: any[]) => {
+      tap((data: any) => {
         this.langMenu.next(data);
       })
     );
   }
 
-  onLangChanging(lang) {
+  onLangChanging(lang: any) {
     this.bookService.navigateByLangUrl(lang);
   }
 }

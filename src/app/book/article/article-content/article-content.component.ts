@@ -68,7 +68,7 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
 
   ngOnInit() {}
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes: any) {
     if (changes.articleContent && changes.articleContent.currentValue.length) {
       this.contentChanged = true;
       this.footnoteService.closeFootnote();
@@ -85,12 +85,12 @@ export class ArticleContentComponent implements OnInit, OnChanges, AfterViewChec
     }
   }
 
-  private _getChunkById(chunks, id) {
-    return chunks.find((i) => i.chunkId === id);
+  private _getChunkById(chunks: any, id: any) {
+    return chunks.find((i: any) => i.chunkId === id);
   }
 
   private _getAllFootnotes(data: Article[]) {
-    return data.reduce((res, a) => {
+    return data.reduce((res: any, a) => {
       if (a.footnotes) {
         a.footnotes.forEach((f) => {
           res[FootnoteService.getFootnoteName(f.id, a.langId)] = f.text;

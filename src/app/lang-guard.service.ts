@@ -17,7 +17,7 @@ export class LangGuardService implements CanActivate {
     const bookId = this.bookService.getSubdomainName();
 
     return this.bookService.getBookLangs(bookId).pipe(
-      map((langs: any[]) => {
+      map((langs: any) => {
         if (langs.includes(lang)) {
           this.bookService.bookId = bookId;
 
