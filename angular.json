@@ -25,8 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/fonts/roboto",
-              "src/manifest.webmanifest"
+              "src/assets/fonts/roboto"
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",
@@ -61,9 +60,7 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              ]
             },
             "development": {
               "buildOptimizer": false,
@@ -103,8 +100,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"

@@ -13,9 +13,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {LoadingInterceptor} from './book/loading.interceptor';
 import {ErrorComponent} from './error/error.component';
 import {ServerErrorInterceptor} from './server-error.interceptor';
-import {ServerNameInterceptor} from './server-name.interceptor';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,8 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     SharedModule,
     BookModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    AppRoutingModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
