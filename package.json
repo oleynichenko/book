@@ -7,9 +7,9 @@
     "start": "npm run config -- --environment=dev && ng serve --disable-host-check --port=4202",
     "build": "npm run build:ssr",
     "test": "ng test",
-    "serve:ssr": "node dist/server",
+    "serve:ssr": "node dist/server/main.js",
     "build:ssr": "npm run config -- --environment=prod && ng build && ng run start-book:server",
-    "start:heroku": "node dist/server"
+    "start:heroku": "node dist/server/main.js"
   },
   "engines": {
     "node": "14.15.4",
@@ -29,7 +29,6 @@
     "@angular/platform-server": "12.0.0",
     "@angular/router": "12.0.0",
     "@nguniversal/express-engine": "12.0.0",
-    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@ngx-translate/core": "13.0.0",
     "@ngx-translate/http-loader": "6.0.0",
     "express": "4.17.1",
