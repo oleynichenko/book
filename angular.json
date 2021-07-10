@@ -172,12 +172,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-types-test:build:production",
-              "serverTarget": "angular-types-test:server:production"
+              "browserTarget": "start-book:build:production",
+              "serverTarget": "start-book:server:production"
             },
             "development": {
-              "browserTarget": "angular-types-test:build:development",
-              "serverTarget": "angular-types-test:server:development"
+              "browserTarget": "start-book:build:development",
+              "serverTarget": "start-book:server:development"
             }
           },
           "defaultConfiguration": "production"
